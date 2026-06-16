@@ -1,0 +1,273 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+/* Subcode admin — Howeyah-style capsule UI (blue palette) */
+
+.fi-body {
+    @apply bg-[#f4f6f8] text-[#1a2332];
+    font-family: 'Plus Jakarta Sans', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+}
+
+[dir='rtl'] .fi-body {
+    font-family: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: 0;
+}
+
+/* ── Topbar capsule ── */
+.fi-topbar-ctn {
+    @apply sticky top-0 z-30 border-0 bg-transparent px-4 pt-4 shadow-none lg:px-8;
+}
+
+.fi-topbar {
+    @apply mx-auto flex min-h-[3.75rem] w-full max-w-[88rem] items-center gap-3 rounded-full border border-gray-200/80 bg-white px-4 shadow-[0_4px_24px_rgba(15,23,42,0.06)] ring-0 sm:px-6;
+}
+
+.fi-topbar-start {
+    @apply me-0 flex shrink-0 items-center gap-2;
+}
+
+.fi-topbar-start .fi-logo img {
+    @apply h-9 w-auto max-w-[8.5rem] object-contain;
+}
+
+[dir='rtl'] .fi-topbar-start .fi-logo img {
+    @apply object-right;
+}
+
+.fi-topbar-end {
+    @apply ms-auto shrink-0 gap-x-2 sm:gap-x-3;
+}
+
+.fi-topbar .fi-user-menu-trigger {
+    @apply rounded-full border border-gray-200 px-3 py-1.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-50;
+}
+
+.fi-topbar .fi-user-menu-trigger .fi-user-avatar {
+    @apply hidden sm:flex;
+}
+
+.fi-topbar-open-sidebar-btn,
+.fi-topbar-close-sidebar-btn,
+.fi-topbar-open-collapse-sidebar-btn,
+.fi-topbar-close-collapse-sidebar-btn {
+    @apply text-gray-600 hover:bg-gray-100 hover:text-gray-900;
+}
+
+/* ── Sidebar ── */
+.fi-main-sidebar {
+    @apply bg-transparent lg:bg-transparent;
+}
+
+.fi-main-sidebar.fi-sidebar-open {
+    @apply border-e border-gray-200/80 bg-white shadow-[4px_0_24px_rgba(15,23,42,0.04)];
+}
+
+@media (min-width: 1024px) {
+    .fi-body-has-topbar .fi-main-sidebar.fi-sidebar-open {
+        @apply min-w-[18rem] border-e border-gray-200/60 bg-transparent shadow-none;
+    }
+
+    .fi-main-sidebar .fi-sidebar-header-ctn {
+        @apply mx-3 mt-4;
+    }
+
+    .fi-body-has-topbar .fi-main-sidebar .fi-sidebar-header {
+        @apply rounded-full border border-gray-200/80 bg-white px-5 py-3 shadow-[0_4px_20px_rgba(15,23,42,0.05)];
+    }
+
+    .fi-main-sidebar .fi-sidebar-header .fi-logo img {
+        @apply h-9 w-auto max-w-[9rem] object-contain;
+    }
+
+    .fi-main-sidebar .fi-sidebar-nav {
+        @apply mx-3 mb-4 rounded-3xl border border-gray-200/80 bg-white px-3 py-5 shadow-[0_4px_20px_rgba(15,23,42,0.05)];
+    }
+}
+
+.fi-sidebar-group-label {
+    @apply text-xs font-semibold tracking-wide text-gray-400 uppercase;
+}
+
+/* Filament v5 */
+.fi-sidebar-item-btn {
+    @apply rounded-full transition-all duration-200;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    @apply border border-[#3D8EBF]/40 bg-[#3D8EBF]/10 text-[#1e4a6e] shadow-none;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon {
+    @apply text-[#2d7ab8];
+}
+
+.fi-sidebar-item.fi-sidebar-item-has-url > .fi-sidebar-item-btn:hover {
+    @apply bg-gray-100;
+}
+
+/* Filament v4 */
+.fi-sidebar-item-button {
+    @apply rounded-full transition-all duration-200;
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-button {
+    @apply border border-[#3D8EBF]/40 bg-[#3D8EBF]/10 text-[#1e4a6e] shadow-none;
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-button .fi-icon,
+.fi-sidebar-item-active .fi-sidebar-item-icon {
+    @apply text-[#2d7ab8];
+}
+
+.fi-sidebar-item:not(.fi-sidebar-item-active) .fi-sidebar-item-button:hover {
+    @apply bg-gray-100;
+}
+
+.fi-sidebar-item-label {
+    @apply text-[0.9375rem] font-medium tracking-tight text-gray-600;
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label,
+.fi-sidebar-item-active .fi-sidebar-item-label {
+    @apply font-semibold text-[#1e4a6e];
+}
+
+.fi-sidebar-item-btn > .fi-icon,
+.fi-sidebar-item-button > .fi-icon {
+    @apply text-gray-400;
+}
+
+.fi-sidebar-nav {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.fi-sidebar-nav::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* ── Main content ── */
+.fi-main-ctn {
+    background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(61, 142, 191, 0.12), transparent 70%),
+        linear-gradient(180deg, #f0f3f7 0%, #f7f9fb 40%, #fafbfc 100%);
+}
+
+.fi-main {
+    @apply bg-transparent py-6;
+}
+
+.fi-page-header-heading,
+.fi-section-header-heading,
+.fi-header-heading {
+    @apply font-semibold tracking-tight text-[#1a2332];
+}
+
+.fi-section:not(.fi-section-not-contained),
+.fi-wi-stats-overview-stat {
+    @apply rounded-2xl border border-gray-200/80 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)];
+}
+
+.fi-ta-ctn {
+    @apply overflow-hidden rounded-2xl border border-gray-200/80 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)];
+}
+
+.fi-fo-repeater-item {
+    @apply rounded-2xl border border-gray-200 bg-gray-50/80;
+}
+
+.fi-tabs {
+    @apply rounded-2xl border border-gray-200/80 bg-white p-2 shadow-[0_8px_30px_rgba(15,23,42,0.04)];
+}
+
+.fi-tabs-item {
+    @apply rounded-xl font-medium;
+}
+
+.fi-tabs-item.fi-active,
+.fi-tabs-item-active {
+    @apply border border-gray-200 bg-gray-50 text-[#1e3a5f] shadow-sm;
+}
+
+.fi-btn {
+    @apply rounded-full px-5 font-semibold tracking-tight shadow-none;
+}
+
+.fi-btn.fi-color-primary {
+    @apply text-white;
+}
+
+.fi-input-wrp,
+.fi-select-input,
+.fi-fo-rich-editor {
+    @apply rounded-xl border-gray-200 bg-white;
+}
+
+.fi-fo-field-wrp-label,
+.fi-in-entry-wrp-label {
+    @apply text-[0.875rem] font-medium tracking-tight text-gray-600;
+}
+
+.fi-fo-rich-editor-content,
+.fi-in-text-item {
+    @apply text-[0.9375rem] leading-relaxed text-[#1a2332];
+}
+
+.fi-ta-header-cell {
+    @apply bg-gray-50/80 text-gray-600;
+}
+
+.fi-ta-row:hover {
+    @apply bg-[#3D8EBF]/5;
+}
+
+.fi-badge.fi-color-primary {
+    @apply border border-[#3D8EBF]/30 bg-[#3D8EBF]/10 text-[#1e4a6e];
+}
+
+/* ── Login ── */
+.fi-simple-page,
+.fi-simple-layout {
+    background:
+        radial-gradient(ellipse 70% 45% at 50% 0%, rgba(61, 142, 191, 0.1), transparent 65%),
+        linear-gradient(180deg, #f0f3f7 0%, #fafbfc 100%);
+}
+
+.fi-simple-main {
+    @apply rounded-3xl border border-gray-200/80 bg-white shadow-[0_20px_50px_rgba(15,23,42,0.06)];
+}
+
+/* ── Modals & dropdowns ── */
+.fi-modal-window,
+.fi-dropdown-panel,
+.fi-global-search-results-ctn {
+    @apply rounded-2xl border border-gray-200/80 bg-white shadow-[0_16px_48px_rgba(15,23,42,0.08)];
+}
+
+/* ── Translatable tabs + rich editor ── */
+.fi-sc-tabs.fi-contained,
+.fi-sc-tabs-tab,
+.fi-sc-tabs-panel {
+    @apply w-full min-w-0;
+}
+
+.fi-sc-tabs .fi-fo-rich-editor,
+.fi-sc-tabs .fi-fo-rich-editor-toolbar,
+.fi-sc-tabs .fi-input-wrp,
+.fi-sc-tabs .fi-fo-field-wrp {
+    @apply w-full max-w-full min-w-0;
+}
+
+.fi-sc-tabs .fi-fo-field-wrp {
+    @apply col-span-full;
+}

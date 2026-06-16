@@ -1,0 +1,285 @@
+<?php
+
+return [
+    // General
+    'name' => 'Name',
+    'email' => 'Email',
+    'mobile' => 'Mobile',
+    'phone' => 'Phone',
+    'password' => 'Password',
+    'avatar' => 'Avatar',
+    'status' => 'Status',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    'email_verified' => 'Email Verified',
+    'created_at' => 'Created At',
+    'updated_at' => 'Updated At',
+    
+    // Sections
+    'personal_information' => 'Personal Information',
+    'account_settings' => 'Account Settings',
+    
+    // Actions
+    'create_admin' => 'Create Admin',
+    'edit_admin' => 'Edit Admin',
+    'view_admin' => 'View Admin',
+    'delete_admin' => 'Delete Admin',
+    
+    // Messages
+    'admin_created' => 'Admin created successfully',
+    'admin_updated' => 'Admin updated successfully',
+    'admin_deleted' => 'Admin deleted successfully',
+    
+    // Blog
+    'title' => 'Title',
+    'description' => 'Description',
+    'slug' => 'Slug',
+    'slug_help' => 'Leave empty to auto-generate from the title. Supports Arabic, English, and Turkish.',
+    'slug_linked_to_title' => 'Linked to title',
+    'slug_manual_edit' => 'Manual edit',
+    'image' => 'Image',
+    'time_publish' => 'Publish Time',
+    'is_active' => 'Is Active',
+    'meta_title' => 'Meta Title',
+    'meta_description' => 'Meta Description',
+    'category' => 'Category',
+    'author' => 'Author',
+    'content' => 'Content',
+    
+    // Category
+    'category_name' => 'Category Name',
+    'parent_category' => 'Parent Category',
+    'icon' => 'Icon',
+    'color' => 'Color',
+    
+    // User
+    'user' => 'User',
+    'users' => 'Users',
+    'verification_code' => 'Verification Code',
+    'mobile_verified_at' => 'Mobile Verified At',
+    'email_verified_at' => 'Email Verified At',
+    'reset_code' => 'Reset Code',
+    
+    // Testimonial
+    'testimonial' => 'Testimonial',
+    'testimonials' => 'Testimonials',
+    'comment' => 'Comment',
+    'rating' => 'Rating',
+    'client_name' => 'Client Name',
+    
+    // FAQ
+    'question' => 'Question',
+    'answer' => 'Answer',
+    'faq' => 'FAQ',
+    'faqs' => 'FAQs',
+    
+    // Settings
+    'settings' => 'Settings',
+    'site_name' => 'Site Name',
+    'site_logo' => 'Site Logo',
+    'site_favicon' => 'Site Favicon',
+    'site_description' => 'Site Description',
+    'site_email' => 'Site Email',
+    'site_phone' => 'Site Phone',
+    'site_address' => 'Site Address',
+    'facebook' => 'Facebook',
+    'twitter' => 'Twitter',
+    'instagram' => 'Instagram',
+    'linkedin' => 'LinkedIn',
+    'youtube' => 'YouTube',
+    'tiktok' => 'TikTok',
+    'snapchat' => 'Snapchat',
+    'pinterest' => 'Pinterest',
+    'whatsapp' => 'WhatsApp',
+    'telegram' => 'Telegram',
+    'terms_conditions' => 'Terms & Conditions',
+    'privacy_policy' => 'Privacy Policy',
+    'refund_policy' => 'Refund Policy',
+    'about_us' => 'About Us',
+    'contact_info' => 'Contact Information',
+    'meta_keywords' => 'Meta Keywords',
+    'google_analytics' => 'Google Analytics',
+    'facebook_pixel' => 'Facebook Pixel',
+    'custom_head_scripts' => 'Custom Head Scripts',
+    'custom_head_scripts_help' => 'Scripts injected before </head> on the frontend.',
+    'custom_body_scripts' => 'Custom Body Scripts',
+    'custom_body_scripts_help' => 'Scripts injected before </body> on the frontend.',
+    'robots_txt' => 'robots.txt',
+    'robots_txt_help' => 'Content served at /api/settings/robots or your frontend robots route.',
+    'currency' => 'Currency',
+    'timezone' => 'Timezone',
+    'language' => 'Language',
+    'maintenance_mode' => 'Maintenance Mode',
+    
+    // Additional sections
+    'content_information' => 'Content Information',
+    'content' => 'Content',
+    'media' => 'Media',
+    'publishing' => 'Publishing',
+    'seo' => 'SEO',
+    'basic_information' => 'Basic Information',
+    'category_settings' => 'Category Settings',
+    'account_status' => 'Account Status',
+    'security' => 'Security',
+    'faq_information' => 'FAQ Information',
+    'client_information' => 'Client Information',
+    'testimonial_content' => 'Testimonial Content',
+    
+    // Additional status options
+    'draft' => 'Draft',
+    'published' => 'Published',
+    'archived' => 'Archived',
+    
+    // Help text
+    'icon_help' => 'Enter icon class (e.g., heroicon-o-home)',
+    
+    // Additional fields
+    'no_code' => 'No code',
+    'mobile_verified' => 'Mobile Verified',
+    'timestamps' => 'Timestamps',
+
+    // blogs
+    'blogs' => 'Blogs',
+    'pages' => 'Pages',
+    'publish' => 'Published',
+    'schedule' => 'Scheduled',
+    'post_details' => 'Post Details',
+
+    // Navigation & resources
+    'admins' => 'Admins',
+    'admin' => 'Admin',
+    'categories' => 'Categories',
+    'fqs' => 'FAQs',
+    'notifications' => 'Notifications',
+    'role' => 'Role',
+
+    'specialty' => 'Specialty',
+    'team_member' => 'Team Member',
+    'team_members' => 'Team Members',
+    'client_image' => 'Client Image',
+    'project_name' => 'Project Name',
+    'project_information' => 'Project Information',
+    'project_image' => 'Project Image',
+    'websites' => 'Websites',
+    'website' => 'Website',
+
+    'projects' => 'Projects',
+
+    // Settings sections and tabs
+    'all_settings' => 'All Settings',
+    'save_settings' => 'Save Settings',
+    'updated_successfully' => 'Updated Successfully',
+    'comma_separated' => 'Comma separated',
+    'paste_tracking_code' => 'Paste tracking code here',
+    'paste_pixel_code' => 'Paste pixel code here',
+
+    // Project details
+    'project_details' => 'Project Details',
+    'media_gallery' => 'Media Gallery',
+    'project_advantages' => 'Project Advantages',
+    'project_reviews' => 'Project Reviews',
+    'system_information' => 'System Information',
+    'id' => 'ID',
+
+    'settings' => [
+        'all_settings' => 'All Settings',
+        'tabs' => [
+            'general' => 'General',
+            'social_media' => 'Social Media',
+            'legal_pages' => 'Legal Pages',
+            'about' => 'About',
+            'seo' => 'SEO',
+            'analytics' => 'Analytics',
+        ],
+        'sections' => [
+            'site_information' => 'Site Information',
+            'contact_information' => 'Contact Information',
+            'system_settings' => 'System Settings',
+            'social_networks' => 'Social Networks',
+            'messaging_apps' => 'Messaging Apps',
+            'policies' => 'Policies',
+            'about_content' => 'About Content',
+            'meta_tags' => 'Meta Tags',
+            'tracking_codes' => 'Tracking Codes',
+            'custom_scripts' => 'Custom Scripts & Robots',
+        ],
+    ],
+
+    // Success Numbers
+    'success_numbers' => 'Success Numbers',
+    'success_number' => 'Success Number',
+    'number' => 'Number',
+
+    'phone_egy' => 'Phone (Egypt)',
+    'phone_tr' => 'Phone (Turkey)',
+    'phone_sar' => 'Phone (Saudi Arabia)',
+
+    // Visitors
+    'ip' => 'IP Address',
+    'user_agent' => 'User Agent',
+    'first_seen' => 'First Seen',
+    'last_seen' => 'Last Seen',
+    'hits' => 'Hits',
+    'visitor_count' => 'Visitor Count',
+    'website_visitors' => 'Website Visitors',
+    'websites_visitor_counts' => 'Websites Visitor Counts',
+    'total_websites' => 'Total Websites',
+    'websites_with_visitors' => 'Websites with Visitors',
+    'websites_that_have_visitors' => 'Websites that have visitors',
+    'total_visitors' => 'Total Visitors',
+    'total_visitor_count' => 'Total visitor count',
+    'link_website'=>'Link Website',
+
+    'profile_two'=>'Profile Two',
+    'profile_one'=>'Profile One',
+
+    'pages_control'=>'Pages Control',
+    'web_site'=>'Web Site',
+    'home_page'=>'Home Page',
+    'about_page'=>'About Page',
+    'our_services'=>'Our Services',
+    'our_projects'=>'Our Projects',
+    'packages'=>'Packages',
+    'our_products'=>'Our Products',
+    'blogs'=>'Blogs',
+
+    // Open Graph / Social
+    'open_graph' => 'Open Graph',
+    'twitter' => 'Twitter',
+    'og_title' => 'OG Title',
+    'og_description' => 'OG Description',
+    'og_image' => 'OG Image',
+    'og_type' => 'OG Type',
+    'og_type_website' => 'Website',
+    'og_type_article' => 'Article',
+    'og_type_product' => 'Product',
+    'twitter_card' => 'Twitter Card',
+    'twitter_card_summary' => 'Summary',
+    'twitter_card_summary_large_image' => 'Summary Large Image',
+    'twitter_title' => 'Twitter Title',
+    'twitter_description' => 'Twitter Description',
+    'twitter_image' => 'Twitter Image',
+    'og_default_image' => 'Default OG Image',
+    'twitter_site' => 'Twitter @site',
+    'twitter_card_default' => 'Default Twitter Card',
+    'facebook_app_id' => 'Facebook App ID',
+    'social_meta_defaults' => 'Social Meta Defaults',
+
+    // Redirects
+    'redirects' => 'Redirects',
+    'redirect' => 'Redirect',
+    'redirect_source_path' => 'Source path',
+    'redirect_source_path_help' => 'Old URL path, e.g. /ar/blogs/old-slug',
+    'redirect_target_path' => 'Target path',
+    'redirect_target_path_help' => 'New URL path or full external URL',
+    'redirect_status_code' => 'Status code',
+    'redirect_resource_type' => 'Content type',
+    'redirect_locale' => 'Locale',
+    'redirect_type_blog' => 'Blog',
+    'redirect_type_project' => 'Project',
+    'redirect_type_website' => 'Website',
+    'redirect_type_service' => 'Service',
+    'redirect_type_package' => 'Package',
+    'redirect_type_page' => 'Static page',
+    'redirect_type_other' => 'Other',
+];
