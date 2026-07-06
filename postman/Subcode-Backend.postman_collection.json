@@ -1,0 +1,1563 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "Subcode Backend API",
+		"description": "جميع endpoints لمشروع Subcode Backend (Laravel 12).\n\n**Base URL:** `{{base_url}}/api`\n\n**Headers موصى بها:**\n- `Accept-Language`: `ar` | `en` | `tr` (الافتراضي: ar)\n- `Accept`: `application/json`\n\n**ملاحظات:**\n- لا يوجد authentication على الـ API routes المسجّلة حالياً.\n- مسار `GET /api/testimonials` مسجّل مرتين (PageController + TestimonialController) — قد يسبب تعارض.\n- Auth و Profile controllers موجودة في الكود لكن غير مربوطة في routes/api.php.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost",
+			"type": "string"
+		},
+		{
+			"key": "accept_language",
+			"value": "ar",
+			"type": "string"
+		}
+	],
+	"auth": {
+		"type": "noauth"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": []
+			}
+		}
+	],
+	"item": [
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/up",
+							"host": ["{{base_url}}"],
+							"path": ["up"]
+						},
+						"description": "Laravel health check endpoint."
+					}
+				}
+			]
+		},
+		{
+			"name": "Pages & Newsletter",
+			"item": [
+				{
+					"name": "Subscribe Newsletter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/news-letters",
+							"host": ["{{base_url}}"],
+							"path": ["api", "news-letters"]
+						},
+						"description": "Body: `email` (required, email, unique, min:5, max:255)"
+					}
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "Category With Blogs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/category-with-blogs",
+							"host": ["{{base_url}}"],
+							"path": ["api", "category-with-blogs"]
+						}
+					}
+				},
+				{
+					"name": "All Blogs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/all-blog?page=1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "all-blog"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Pagination (15 per page)"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Single Blog",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/blog/:slug",
+							"host": ["{{base_url}}"],
+							"path": ["api", "blog", ":slug"],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "blog-slug"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Partner Successes",
+			"item": [
+				{
+					"name": "List Partner Successes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/partner-successes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "partner-successes"]
+						}
+					}
+				},
+				{
+					"name": "Show Partner Success",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/partner-successes/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "partner-successes", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "About Us",
+			"item": [
+				{
+					"name": "Get About Us",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/about-us",
+							"host": ["{{base_url}}"],
+							"path": ["api", "about-us"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "List Services",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/services",
+							"host": ["{{base_url}}"],
+							"path": ["api", "services"]
+						}
+					}
+				},
+				{
+					"name": "Show Service",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/services/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "services", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID or slug"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Departments",
+			"item": [
+				{
+					"name": "List Departments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/departments",
+							"host": ["{{base_url}}"],
+							"path": ["api", "departments"]
+						}
+					}
+				},
+				{
+					"name": "Show Department",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/departments/:slug",
+							"host": ["{{base_url}}"],
+							"path": ["api", "departments", ":slug"],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "department-slug"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "List Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects?page=1&department_id=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Pagination (15 per page)"
+								},
+								{
+									"key": "department_id",
+									"value": "",
+									"description": "Optional filter by department ID"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Show Project",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/:slug",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects", ":slug"],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "project-slug",
+									"description": "Slug or ID"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Special Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects-special?page=1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "projects-special"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Pagination (15 per page)"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Packages",
+			"item": [
+				{
+					"name": "List Packages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/packages?type=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "packages"],
+							"query": [
+								{
+									"key": "type",
+									"value": "",
+									"description": "Optional: programming | marketing"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Show Package",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/packages/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "packages", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID or slug"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Feature Packages",
+			"item": [
+				{
+					"name": "List Feature Packages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/feature-packages",
+							"host": ["{{base_url}}"],
+							"path": ["api", "feature-packages"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Testimonials",
+			"item": [
+				{
+					"name": "List Testimonials",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/testimonials",
+							"host": ["{{base_url}}"],
+							"path": ["api", "testimonials"]
+						},
+						"description": "ملاحظة: هذا المسار مسجّل مرتين في routes/api.php (تعارض محتمل)."
+					}
+				},
+				{
+					"name": "Show Testimonial",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/testimonials/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "testimonials", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Testimonial",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_name",
+									"value": "Client Name",
+									"type": "text",
+									"description": "required"
+								},
+								{
+									"key": "description",
+									"value": "Testimonial description",
+									"type": "text",
+									"description": "required"
+								},
+								{
+									"key": "project_name",
+									"value": "Project Name",
+									"type": "text",
+									"description": "required"
+								},
+								{
+									"key": "client_image",
+									"type": "file",
+									"description": "optional, jpeg/png/jpg/gif, max 2MB"
+								},
+								{
+									"key": "project_image",
+									"type": "file",
+									"description": "optional, jpeg/png/jpg/gif, max 2MB"
+								},
+								{
+									"key": "is_active",
+									"value": "1",
+									"type": "text",
+									"description": "optional boolean"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/testimonials",
+							"host": ["{{base_url}}"],
+							"path": ["api", "testimonials"]
+						}
+					}
+				},
+				{
+					"name": "Update Testimonial",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client_name",
+									"value": "Updated Client Name",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Updated description",
+									"type": "text"
+								},
+								{
+									"key": "project_name",
+									"value": "Updated Project",
+									"type": "text"
+								},
+								{
+									"key": "client_image",
+									"type": "file"
+								},
+								{
+									"key": "project_image",
+									"type": "file"
+								},
+								{
+									"key": "is_active",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/testimonials/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "testimonials", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Testimonial",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/testimonials/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "testimonials", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Team",
+			"item": [
+				{
+					"name": "List Team Members",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/team",
+							"host": ["{{base_url}}"],
+							"path": ["api", "team"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Websites",
+			"item": [
+				{
+					"name": "List Websites",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/websites?page=1&department_id=",
+							"host": ["{{base_url}}"],
+							"path": ["api", "websites"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Pagination (15 per page)"
+								},
+								{
+									"key": "department_id",
+									"value": "",
+									"description": "Optional filter"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Show Website",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/websites/:slug",
+							"host": ["{{base_url}}"],
+							"path": ["api", "websites", ":slug"],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "website-slug"
+								}
+							]
+						},
+						"description": "يتتبع الزائر تلقائياً عبر IP و User-Agent."
+					}
+				}
+			]
+		},
+		{
+			"name": "Success Numbers",
+			"item": [
+				{
+					"name": "List Success Numbers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/success-numbers",
+							"host": ["{{base_url}}"],
+							"path": ["api", "success-numbers"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "FAQs",
+			"item": [
+				{
+					"name": "List FAQs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/fqs",
+							"host": ["{{base_url}}"],
+							"path": ["api", "fqs"]
+						}
+					}
+				},
+				{
+					"name": "Show FAQ",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/fqs/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "fqs", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"item": [
+				{
+					"name": "Get Settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/settings",
+							"host": ["{{base_url}}"],
+							"path": ["api", "settings"]
+						}
+					}
+				},
+				{
+					"name": "Get Scripts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/settings/scripts",
+							"host": ["{{base_url}}"],
+							"path": ["api", "settings", "scripts"]
+						},
+						"description": "Head/body scripts, robots, GA, FB pixel."
+					}
+				},
+				{
+					"name": "Get Robots.txt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/settings/robots",
+							"host": ["{{base_url}}"],
+							"path": ["api", "settings", "robots"]
+						},
+						"description": "يرجع plain text (محتوى robots.txt)."
+					}
+				}
+			]
+		},
+		{
+			"name": "Slugs",
+			"item": [
+				{
+					"name": "All Slugs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/all-slugs?locale=ar&all_locales=false",
+							"host": ["{{base_url}}"],
+							"path": ["api", "all-slugs"],
+							"query": [
+								{
+									"key": "locale",
+									"value": "ar",
+									"description": "Default: ar"
+								},
+								{
+									"key": "all_locales",
+									"value": "false",
+									"description": "Boolean"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "All Slugs By Locale",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/all-slugs/:locale?all_locales=false",
+							"host": ["{{base_url}}"],
+							"path": ["api", "all-slugs", ":locale"],
+							"query": [
+								{
+									"key": "all_locales",
+									"value": "false"
+								}
+							],
+							"variable": [
+								{
+									"key": "locale",
+									"value": "ar",
+									"description": "ar | en | tr"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Features",
+			"item": [
+				{
+					"name": "List Features",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/features",
+							"host": ["{{base_url}}"],
+							"path": ["api", "features"]
+						}
+					}
+				},
+				{
+					"name": "Show Feature",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/features/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "features", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Advantage Projects",
+			"item": [
+				{
+					"name": "List Advantage Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/advantage-projects",
+							"host": ["{{base_url}}"],
+							"path": ["api", "advantage-projects"]
+						}
+					}
+				},
+				{
+					"name": "Show Advantage Project",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/advantage-projects/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "advantage-projects", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Review Projects",
+			"item": [
+				{
+					"name": "List Review Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/review-projects",
+							"host": ["{{base_url}}"],
+							"path": ["api", "review-projects"]
+						}
+					}
+				},
+				{
+					"name": "Show Review Project",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/review-projects/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "review-projects", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Occasions",
+			"item": [
+				{
+					"name": "List Occasions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/occasions",
+							"host": ["{{base_url}}"],
+							"path": ["api", "occasions"]
+						}
+					}
+				},
+				{
+					"name": "Show Occasion",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/occasions/:slugOrId",
+							"host": ["{{base_url}}"],
+							"path": ["api", "occasions", ":slugOrId"],
+							"variable": [
+								{
+									"key": "slugOrId",
+									"value": "occasion-slug"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Sectors",
+			"item": [
+				{
+					"name": "List Sectors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/sectors",
+							"host": ["{{base_url}}"],
+							"path": ["api", "sectors"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "List Categories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories"]
+						}
+					}
+				},
+				{
+					"name": "Show Category",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories/:slugOrId",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories", ":slugOrId"],
+							"variable": [
+								{
+									"key": "slugOrId",
+									"value": "category-slug"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Visitor Tracking",
+			"item": [
+				{
+					"name": "Track Visitor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/visitor",
+							"host": ["{{base_url}}"],
+							"path": ["api", "visitor"]
+						},
+						"description": "لا يحتاج body — يستخدم IP و User-Agent من الطلب."
+					}
+				}
+			]
+		},
+		{
+			"name": "Redirects",
+			"item": [
+				{
+					"name": "Resolve Redirect",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{accept_language}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/redirects/resolve?path=/old-path",
+							"host": ["{{base_url}}"],
+							"path": ["api", "redirects", "resolve"],
+							"query": [
+								{
+									"key": "path",
+									"value": "/old-path",
+									"description": "required"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Web Routes (Non-API)",
+			"item": [
+				{
+					"name": "Home",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/",
+							"host": ["{{base_url}}"],
+							"path": [""]
+						}
+					}
+				},
+				{
+					"name": "Sitemap Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sitemap.xml",
+							"host": ["{{base_url}}"],
+							"path": ["sitemap.xml"]
+						}
+					}
+				},
+				{
+					"name": "Pages Sitemap",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pages-ar.xml",
+							"host": ["{{base_url}}"],
+							"path": ["pages-ar.xml"],
+							"description": "locale: ar | en | tr"
+						}
+					}
+				},
+				{
+					"name": "Posts Sitemap",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/posts-ar.xml",
+							"host": ["{{base_url}}"],
+							"path": ["posts-ar.xml"],
+							"description": "locale: ar | en | tr"
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Unregistered (Not in routes/api.php)",
+			"description": "Controllers موجودة في الكود لكن غير مربوطة حالياً في routes/api.php",
+			"item": [
+				{
+					"name": "Auth - Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"User Name\",\n    \"mobile\": \"0500000000\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/register",
+							"host": ["{{base_url}}"],
+							"path": ["api", "register"]
+						},
+						"description": "⚠️ غير مسجّل — للتوثيق فقط"
+					}
+				},
+				{
+					"name": "Auth - Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobile\": \"0500000000\",\n    \"password\": \"password123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "login"]
+						},
+						"description": "⚠️ غير مسجّل — للتوثيق فقط"
+					}
+				},
+				{
+					"name": "Auth - Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/logout",
+							"host": ["{{base_url}}"],
+							"path": ["api", "logout"]
+						},
+						"description": "⚠️ غير مسجّل — يتطلب Sanctum token"
+					}
+				},
+				{
+					"name": "Profile - Show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "profile"]
+						},
+						"description": "⚠️ غير مسجّل — يتطلب Sanctum token"
+					}
+				}
+			]
+		}
+	]
+}

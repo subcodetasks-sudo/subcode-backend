@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Projects\Schemas;
 
+use Illuminate\Support\Facades\App;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\RepeatableEntry;
@@ -65,10 +66,14 @@ class ProjectInfolist
                                 ->schema([
                                     TextEntry::make('description')
                                         ->label(__('strings.description'))
+                                        ->formatStateUsing(fn ($record) => $record->getTranslation('description', App::getLocale(), false) ?? '')
+                                        ->markdown()
                                         ->columnSpanFull(),
 
                                     TextEntry::make('long_description')
                                         ->label(__('strings.long_description'))
+                                        ->formatStateUsing(fn ($record) => $record->getTranslation('long_description', App::getLocale(), false) ?? '')
+                                        ->markdown()
                                         ->columnSpanFull(),
 
                                     TextEntry::make('link_project')
