@@ -71,14 +71,19 @@ trait GeneratesTranslatableSlug
         return $query->where("slug->{$locale}", $slug);
     }
 
-    public static function findBySlugOrId(string|int $slugOrId, ?string $locale = null): ?static
+    public function scopeFindBySlugOrId($query, string|int $slugOrId, ?string $locale = null)
     {
         $locale = $locale ?? app()->getLocale();
 
         if (is_numeric($slugOrId)) {
-            return static::query()->find((int) $slugOrId);
+            return $query->find((int) $slugOrId);
         }
 
-        return static::query()->whereSlug((string) $slugOrId, $locale)->first();
+        return $query->whereSlug((string) $slugOrId, $locale)->first();
+    }
+
+    public static function findBySlugOrId(string|int $slugOrId, ?string $locale = null): ?static
+    {
+        return static::query()->findBySlugOrId($slugOrId, $locale);
     }
 }

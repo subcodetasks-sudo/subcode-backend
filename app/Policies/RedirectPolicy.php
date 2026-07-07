@@ -4,73 +4,67 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
+use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\Redirect;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Foundation\Auth\User as AuthUser;
 
 class RedirectPolicy
 {
     use HandlesAuthorization;
-
+    
     public function viewAny(AuthUser $authUser): bool
     {
-        return $this->canManage($authUser, 'ViewAny');
+        return $authUser->can('ViewAny:Redirect');
     }
 
     public function view(AuthUser $authUser, Redirect $redirect): bool
     {
-        return $this->canManage($authUser, 'View');
+        return $authUser->can('View:Redirect');
     }
 
     public function create(AuthUser $authUser): bool
     {
-        return $this->canManage($authUser, 'Create');
+        return $authUser->can('Create:Redirect');
     }
 
     public function update(AuthUser $authUser, Redirect $redirect): bool
     {
-        return $this->canManage($authUser, 'Update');
+        return $authUser->can('Update:Redirect');
     }
 
     public function delete(AuthUser $authUser, Redirect $redirect): bool
     {
-        return $this->canManage($authUser, 'Delete');
+        return $authUser->can('Delete:Redirect');
     }
 
     public function restore(AuthUser $authUser, Redirect $redirect): bool
     {
-        return $this->canManage($authUser, 'Restore');
+        return $authUser->can('Restore:Redirect');
     }
 
     public function forceDelete(AuthUser $authUser, Redirect $redirect): bool
     {
-        return $this->canManage($authUser, 'ForceDelete');
+        return $authUser->can('ForceDelete:Redirect');
     }
 
     public function forceDeleteAny(AuthUser $authUser): bool
     {
-        return $this->canManage($authUser, 'ForceDeleteAny');
+        return $authUser->can('ForceDeleteAny:Redirect');
     }
 
     public function restoreAny(AuthUser $authUser): bool
     {
-        return $this->canManage($authUser, 'RestoreAny');
+        return $authUser->can('RestoreAny:Redirect');
     }
 
     public function replicate(AuthUser $authUser, Redirect $redirect): bool
     {
-        return $this->canManage($authUser, 'Replicate');
+        return $authUser->can('Replicate:Redirect');
     }
 
     public function reorder(AuthUser $authUser): bool
     {
-        return $this->canManage($authUser, 'Reorder');
+        return $authUser->can('Reorder:Redirect');
     }
 
-    private function canManage(AuthUser $authUser, string $action): bool
-    {
-        return $authUser->can("{$action}:Redirect")
-            || $authUser->can("{$action}:SeoSetting")
-            || $authUser->can('View:Settings');
-    }
 }
