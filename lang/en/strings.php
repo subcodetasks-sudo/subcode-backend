@@ -18,6 +18,8 @@ return
         'features' => 'Features',
         'aboutus' => 'About Us',
         'partners' => 'Success Partners',
+        'our_achievements' => 'Our Achievements',
+        'achievement' => 'Achievement',
         'services' => 'Services',
         'projects' => 'Projects',
         'brands' => 'Brands',

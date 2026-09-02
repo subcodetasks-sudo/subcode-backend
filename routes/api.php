@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\V1\SuccessNumberController;
 use App\Http\Controllers\Api\V1\ReviewProjectController;
 use App\Http\Controllers\Api\V1\FeaturePackageController;
 use App\Http\Controllers\Api\V1\PartnerSuccessController;
+use App\Http\Controllers\Api\V1\AchievementController;
 use App\Http\Controllers\Api\V1\AdvantageProjectController;
 use App\Http\Controllers\Api\V1\OccasionController;
 use App\Http\Controllers\Api\V1\SectorController;
@@ -47,6 +48,10 @@ use App\Http\Controllers\Api\V1\SlugController;
     // Partner Successes routes
     Route::get('partner-successes', [PartnerSuccessController::class, 'index']);
     Route::get('partner-successes/{id}', [PartnerSuccessController::class, 'show']);
+
+    // Achievements routes
+    Route::get('achievements', [AchievementController::class, 'index']);
+    Route::get('achievements/{id}', [AchievementController::class, 'show']);
     
 
 

@@ -15,6 +15,8 @@ return [
     'features' => 'المميزات',
     'aboutus' => 'من نحن',
     'partners' => 'شركاء النجاح',
+    'our_achievements' => 'إنجازاتنا',
+    'achievement' => 'إنجاز',
     'services' => 'الخدمات',
     'projects' => 'المشاريع',
     'brands' => 'العلامات التجارية',

@@ -34,6 +34,8 @@ return [
     'advantage_project_fetched_successfully' => 'Advantage project fetched successfully',
     'partner_successes_fetched_successfully' => 'Partner successes fetched successfully',
     'partner_success_fetched_successfully' => 'Partner success fetched successfully',
+    'achievements_fetched_successfully' => 'Achievements fetched successfully',
+    'achievement_fetched_successfully' => 'Achievement fetched successfully',
     'review_projects_fetched_successfully' => 'Review projects fetched successfully',
     'review_project_fetched_successfully' => 'Review project fetched successfully',
 
@@ -54,6 +56,7 @@ return [
     'feature_package_not_found' => 'Feature package not found',
     'advantage_project_not_found' => 'Advantage project not found',
     'partner_success_not_found' => 'Partner success not found',
+    'achievement_not_found' => 'Achievement not found',
     'review_project_not_found' => 'Review project not found',
     'data_not_found' => 'Data not found',
     'error_retrieving_data' => 'Error retrieving data',

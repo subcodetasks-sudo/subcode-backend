@@ -34,6 +34,8 @@ return [
     'advantage_project_fetched_successfully' => 'تم جلب ميزة المشروع بنجاح',
     'partner_successes_fetched_successfully' => 'تم جلب نجاحات الشركاء بنجاح',
     'partner_success_fetched_successfully' => 'تم جلب نجاح الشريك بنجاح',
+    'achievements_fetched_successfully' => 'تم جلب الإنجازات بنجاح',
+    'achievement_fetched_successfully' => 'تم جلب الإنجاز بنجاح',
     'review_projects_fetched_successfully' => 'تم جلب مراجعات المشاريع بنجاح',
     'review_project_fetched_successfully' => 'تم جلب مراجعة المشروع بنجاح',
 
@@ -54,6 +56,7 @@ return [
     'feature_package_not_found' => 'باقة الميزة غير موجودة',
     'advantage_project_not_found' => 'ميزة المشروع غير موجودة',
     'partner_success_not_found' => 'نجاح الشريك غير موجود',
+    'achievement_not_found' => 'الإنجاز غير موجود',
     'review_project_not_found' => 'مراجعة المشروع غير موجودة',
     'data_not_found' => 'البيانات غير موجودة',
     'error_retrieving_data' => 'خطأ في استرداد البيانات',
