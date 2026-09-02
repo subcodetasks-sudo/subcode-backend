@@ -9,6 +9,7 @@ return
         'description' => 'Description',
         'image' => 'Image',
         'image_hint' => 'Supported formats: JPG, PNG. Max size: 2MB',
+        'media_hint' => 'Supported formats: JPG, PNG, WEBP, MP4, WEBM, MOV. Max size: 50MB',
         'project_completed' => 'Project Completed',
         'years_of_experience' => 'Years of Experience',
         'clients_worldwide' => 'Clients Worldwide',

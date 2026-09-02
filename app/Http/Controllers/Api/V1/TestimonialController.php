@@ -15,6 +15,10 @@ class TestimonialController extends Controller
 {
     use ApiResponse;
 
+    private const MEDIA_MIMES = 'jpeg,png,jpg,gif,webp,mp4,webm,mov,avi,mkv';
+
+    private const MEDIA_MAX_KB = 51200;
+
     /**
      * Display a listing of testimonials.
      */
@@ -56,8 +60,8 @@ class TestimonialController extends Controller
         $validator = Validator::make($request->all(), [
             'client_name' => 'required|string|max:255',
             'description' => 'required|string',
-            'client_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'project_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'client_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.self::MEDIA_MAX_KB,
+            'project_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.self::MEDIA_MAX_KB,
             'project_name' => 'required|string|max:255',
             'is_active' => 'boolean',
         ]);
@@ -107,8 +111,8 @@ class TestimonialController extends Controller
         $validator = Validator::make($request->all(), [
             'client_name' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|required|string',
-            'client_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'project_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'client_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.self::MEDIA_MAX_KB,
+            'project_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.self::MEDIA_MAX_KB,
             'project_name' => 'sometimes|required|string|max:255',
             'is_active' => 'boolean',
         ]);

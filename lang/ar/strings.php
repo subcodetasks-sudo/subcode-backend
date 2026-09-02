@@ -7,6 +7,7 @@ return [
     'description' => 'الوصف',
     'image' => 'الصورة',
     'image_hint' => 'الصيغ المدعومة: JPG، PNG. الحد الأقصى للحجم: 2 ميجابايت',
+    'media_hint' => 'الصيغ المدعومة: JPG، PNG، WEBP، MP4، WEBM، MOV. الحد الأقصى للحجم: 50 ميجابايت',
     'project_completed' => 'المشروع المكتمل',
     'years_of_experience' => 'سنوات الخبرة',
     'clients_worldwide' => 'العملاء حول العالم',

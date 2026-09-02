@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminSeeder::class,
+            ShieldSeeder::class,
             // CategorySeeder::class,
             // BlogSeeder::class,
             // FQSeeder::class,

@@ -25,9 +25,18 @@ class TestimonialForm
                         FileUpload::make('client_image')
                             ->label(__('admin.client_image'))
                             ->disk('public')
-                            ->image()
-                            ->maxSize(2048)
-                            ->helperText(__('strings.image_hint')),
+                            ->directory('testimonials/clients')
+                            ->acceptedFileTypes([
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif',
+                                'image/webp',
+                                'video/mp4',
+                                'video/webm',
+                                'video/quicktime',
+                            ])
+                            ->maxSize(51200)
+                            ->helperText(__('strings.media_hint')),
                         SeoSection::imageAltField('client_image_alt'),
                     ])->columns(2)->columnSpanFull(),
 
@@ -50,9 +59,18 @@ class TestimonialForm
                         FileUpload::make('project_image')
                             ->label(__('admin.project_image'))
                             ->disk('public')
-                            ->image()
-                            ->maxSize(2048)
-                            ->helperText(__('strings.image_hint')),
+                            ->directory('testimonials/projects')
+                            ->acceptedFileTypes([
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif',
+                                'image/webp',
+                                'video/mp4',
+                                'video/webm',
+                                'video/quicktime',
+                            ])
+                            ->maxSize(51200)
+                            ->helperText(__('strings.media_hint')),
                         SeoSection::imageAltField('project_image_alt'),
                         Toggle::make('is_active')
                             ->label(__('admin.is_active'))

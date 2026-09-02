@@ -29,4 +29,17 @@ class Testimonial extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public static function isVideoPath(?string $path): bool
+    {
+        if (! $path) {
+            return false;
+        }
+
+        return in_array(
+            strtolower(pathinfo($path, PATHINFO_EXTENSION)),
+            ['mp4', 'webm', 'mov', 'avi', 'mkv', 'ogv', 'ogg'],
+            true,
+        );
+    }
 }

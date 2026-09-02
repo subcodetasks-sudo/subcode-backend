@@ -38,4 +38,17 @@ trait WithSeoMeta
             'alt' => $alt,
         ];
     }
+
+    protected function mediaWithAlt(?string $path, mixed $alt = null): ?array
+    {
+        if (! $path) {
+            return null;
+        }
+
+        return [
+            'url' => url("storage/{$path}"),
+            'alt' => $alt,
+            'type' => \App\Models\Testimonial::isVideoPath($path) ? 'video' : 'image',
+        ];
+    }
 }
