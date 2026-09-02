@@ -21,13 +21,69 @@
     letter-spacing: 0;
 }
 
-/* ── Topbar capsule ── */
+/* ── Topbar + Sidebar layout (connected, full-height sidebar) ── */
 .fi-topbar-ctn {
-    @apply sticky top-0 z-30 border-0 bg-transparent px-4 pt-4 shadow-none lg:px-8;
+    @apply sticky top-0 z-30 border-0 bg-transparent px-4 pt-3 pb-0 shadow-none;
 }
 
 .fi-topbar {
-    @apply mx-auto flex min-h-[3.75rem] w-full max-w-[88rem] items-center gap-3 rounded-full border border-gray-200/80 bg-white px-4 shadow-[0_4px_24px_rgba(15,23,42,0.06)] ring-0 sm:px-6;
+    @apply mx-auto flex h-12 min-h-12 w-full max-w-[88rem] items-center gap-3 rounded-full border border-gray-200/80 bg-white px-4 shadow-[0_4px_24px_rgba(15,23,42,0.06)] ring-0 sm:px-6;
+}
+
+@media (min-width: 1024px) {
+    .fi-body-has-topbar.fi-body-has-navigation {
+        display: grid;
+        grid-template-areas:
+            'sidebar topbar'
+            'sidebar main';
+        grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr);
+        min-height: 100dvh;
+    }
+
+    .fi-body-has-topbar.fi-body-has-navigation .fi-layout {
+        display: contents;
+    }
+
+    /* Livewire wraps sidebar in an extra div — flatten it for grid placement */
+    .fi-body-has-topbar.fi-body-has-navigation .fi-layout > div:has(.fi-sidebar) {
+        display: contents;
+    }
+
+    .fi-body-has-topbar.fi-body-has-navigation .fi-topbar-ctn {
+        grid-area: topbar;
+        @apply sticky top-0 z-30 flex items-start self-start bg-transparent px-6 pt-3 pb-0 shadow-none;
+    }
+
+    .fi-body-has-topbar.fi-body-has-navigation .fi-topbar {
+        @apply mx-0 h-12 min-h-12 w-full max-w-none rounded-full border border-gray-200/80 bg-white px-4 shadow-[0_4px_24px_rgba(15,23,42,0.06)] sm:px-6;
+    }
+
+    .fi-body-has-topbar.fi-body-has-navigation .fi-main-ctn {
+        grid-area: main;
+        @apply flex min-h-0 min-w-0 opacity-100;
+        min-height: 0 !important;
+    }
+
+    .fi-body-has-topbar.fi-body-has-navigation .fi-sidebar {
+        grid-area: sidebar;
+        grid-row: 1 / -1;
+        @apply sticky top-0 z-20 flex h-dvh min-h-dvh w-(--sidebar-width) flex-col bg-transparent;
+        top: 0 !important;
+        height: 100dvh !important;
+    }
+
+    .fi-body-has-topbar.fi-body-has-navigation .fi-sidebar.fi-sidebar-open {
+        @apply border-0 bg-transparent shadow-none ring-0;
+    }
+
+    .fi-body-has-topbar.fi-body-has-navigation .fi-sidebar .fi-sidebar-header-ctn {
+        @apply hidden;
+    }
+
+    .fi-body-has-topbar.fi-body-has-navigation .fi-sidebar .fi-sidebar-nav {
+        @apply mx-3 mt-3 mb-4 flex-1 rounded-3xl border border-gray-200/80 bg-white px-3 py-5 shadow-[0_4px_20px_rgba(15,23,42,0.05)];
+    }
 }
 
 .fi-topbar-start {
@@ -61,34 +117,22 @@
     @apply text-gray-600 hover:bg-gray-100 hover:text-gray-900;
 }
 
-/* ── Sidebar ── */
-.fi-main-sidebar {
-    @apply bg-transparent lg:bg-transparent;
+/* ── Sidebar (mobile + shared) ── */
+.fi-sidebar {
+    @apply bg-white lg:bg-transparent;
 }
 
-.fi-main-sidebar.fi-sidebar-open {
-    @apply border-e border-gray-200/80 bg-white shadow-[4px_0_24px_rgba(15,23,42,0.04)];
+.fi-sidebar.fi-sidebar-open {
+    @apply border-e border-gray-200/80 bg-white shadow-[4px_0_24px_rgba(15,23,42,0.04)] lg:border-0 lg:shadow-none;
 }
 
-@media (min-width: 1024px) {
-    .fi-body-has-topbar .fi-main-sidebar.fi-sidebar-open {
-        @apply min-w-[18rem] border-e border-gray-200/60 bg-transparent shadow-none;
+@media (max-width: 1023px) {
+    .fi-sidebar .fi-sidebar-header-ctn {
+        @apply mt-0;
     }
 
-    .fi-main-sidebar .fi-sidebar-header-ctn {
-        @apply mx-3 mt-4;
-    }
-
-    .fi-body-has-topbar .fi-main-sidebar .fi-sidebar-header {
-        @apply rounded-full border border-gray-200/80 bg-white px-5 py-3 shadow-[0_4px_20px_rgba(15,23,42,0.05)];
-    }
-
-    .fi-main-sidebar .fi-sidebar-header .fi-logo img {
-        @apply h-9 w-auto max-w-[9rem] object-contain;
-    }
-
-    .fi-main-sidebar .fi-sidebar-nav {
-        @apply mx-3 mb-4 rounded-3xl border border-gray-200/80 bg-white px-3 py-5 shadow-[0_4px_20px_rgba(15,23,42,0.05)];
+    .fi-sidebar .fi-sidebar-nav {
+        @apply px-4 py-6;
     }
 }
 
@@ -235,16 +279,51 @@
     @apply border border-[#3D8EBF]/30 bg-[#3D8EBF]/10 text-[#1e4a6e];
 }
 
-/* ── Login ── */
-.fi-simple-page,
-.fi-simple-layout {
-    background:
-        radial-gradient(ellipse 70% 45% at 50% 0%, rgba(61, 142, 191, 0.1), transparent 65%),
-        linear-gradient(180deg, #f0f3f7 0%, #fafbfc 100%);
+/* ── Login: blurred background + glass card ── */
+.fi-body:has(.fi-simple-layout) {
+    @apply relative overflow-x-hidden bg-[#eef2f6];
+    background-image: none;
 }
 
-.fi-simple-main {
-    @apply rounded-3xl border border-gray-200/80 bg-white shadow-[0_20px_50px_rgba(15,23,42,0.06)];
+.fi-body:has(.fi-simple-layout)::before,
+.fi-body:has(.fi-simple-layout)::after {
+    content: '';
+    position: fixed;
+    border-radius: 9999px;
+    filter: blur(88px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.fi-body:has(.fi-simple-layout)::before {
+    width: 32rem;
+    height: 32rem;
+    top: -8rem;
+    inset-inline-end: -6rem;
+    background: rgba(61, 142, 191, 0.38);
+}
+
+.fi-body:has(.fi-simple-layout)::after {
+    width: 28rem;
+    height: 28rem;
+    bottom: -6rem;
+    inset-inline-start: -8rem;
+    background: rgba(30, 74, 110, 0.28);
+}
+
+.fi-body:has(.fi-simple-layout) .fi-simple-layout,
+.fi-body:has(.fi-simple-layout) .fi-simple-main-ctn {
+    @apply relative z-[1] bg-transparent;
+    background-image: none;
+}
+
+.fi-body:has(.fi-simple-layout) .fi-simple-page {
+    @apply bg-transparent;
+    background-image: none;
+}
+
+.fi-body:has(.fi-simple-layout) .fi-simple-main {
+    @apply rounded-3xl border border-white/60 bg-white/55 shadow-[0_24px_64px_rgba(15,23,42,0.1)] ring-0 backdrop-blur-2xl backdrop-saturate-150;
 }
 
 /* ── Modals & dropdowns ── */
