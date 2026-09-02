@@ -14,7 +14,7 @@ class AchievementController extends Controller
 
     public function index(): JsonResponse
     {
-        $achievements = Achievement::query()->with('meta')->latest()->get();
+        $achievements = Achievement::query()->latest()->get();
 
         return $this->success(
             AchievementResource::collection($achievements),
@@ -24,7 +24,7 @@ class AchievementController extends Controller
 
     public function show(int $id): JsonResponse
     {
-        $achievement = Achievement::query()->with('meta')->find($id);
+        $achievement = Achievement::query()->find($id);
 
         if (! $achievement) {
             return $this->error(

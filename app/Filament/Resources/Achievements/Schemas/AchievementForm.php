@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Achievements\Schemas;
 
-use App\Filament\Schemas\Components\SeoSection;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -33,11 +32,7 @@ class AchievementForm
                             ->maxSize(2048)
                             ->helperText(__('strings.image_hint'))
                             ->columnSpanFull(),
-                        SeoSection::imageAltField()
-                            ->columnSpanFull(),
                     ]),
-
-                SeoSection::section(),
             ]);
     }
 }
