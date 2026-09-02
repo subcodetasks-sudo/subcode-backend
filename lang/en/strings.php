@@ -8,6 +8,7 @@ return
         'title' => 'Title',
         'description' => 'Description',
         'image' => 'Image',
+        'video' => 'Video',
         'image_hint' => 'Supported formats: JPG, PNG. Max size: 1 GB',
         'media_hint' => 'Supported formats: JPG, PNG, WEBP, MP4, WEBM, MOV. Max size: 1 GB',
         'project_completed' => 'Project Completed',

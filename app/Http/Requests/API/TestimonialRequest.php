@@ -2,15 +2,18 @@
 
 namespace App\Http\Requests\API;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Support\UploadLimits;
 use App\Traits\ApiResponse;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Symfony\Component\HttpFoundation\Response;
 
 class TestimonialRequest extends FormRequest
 {
     use ApiResponse;
+
+    private const MEDIA_MIMES = 'jpeg,png,jpg,gif,webp,mp4,webm,mov,avi,mkv';
 
     public function authorize(): bool
     {
@@ -20,21 +23,12 @@ class TestimonialRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => 'required|string|max:255',
-            'comment' => 'required|array',
-            'comment.en' => 'required|string',
-            'comment.ar' => 'required|string',
-            'image' => 'nullable|string',
-            'rating' => 'required|integer|min:1|max:5',
+            'media' => 'required|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
             'is_active' => 'nullable|boolean',
         ];
 
         if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['name'] = 'sometimes|string|max:255';
-            $rules['comment'] = 'sometimes|array';
-            $rules['comment.en'] = 'sometimes|string';
-            $rules['comment.ar'] = 'sometimes|string';
-            $rules['rating'] = 'sometimes|integer|min:1|max:5';
+            $rules['media'] = 'sometimes|required|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb();
         }
 
         return $rules;

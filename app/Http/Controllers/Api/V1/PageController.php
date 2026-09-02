@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Resources\TestimonialResource;
 use App\Models\FQ;
 use App\Models\NewLetter;
 use App\Models\Testimonial;
@@ -50,14 +51,9 @@ class PageController extends Controller
                 ], Response::HTTP_OK);
             }
 
-            $data->getCollection()->transform(function ($item) {
-                return [
-                    'name' => $item->name,
-                    'comment' => $item->comment,
-                    'image' => $item->image ? url("storage/{$item->image}"):null,
-                    'rating' => $item->rating,
-                ];
-            });
+            $data->setCollection(
+                TestimonialResource::collection($data->getCollection())->collection
+            );
 
             return response()->json([
                 'status' => true,

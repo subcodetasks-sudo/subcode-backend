@@ -3,12 +3,12 @@
 namespace App\Filament\Resources\Testimonials\Schemas;
 
 use App\Models\Testimonial;
-use Filament\Schemas\Schema;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
-use Filament\Infolists\Components\IconEntry;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\ImageEntry;
+use Filament\Schemas\Schema;
 
 class TestimonialInfolist
 {
@@ -16,57 +16,21 @@ class TestimonialInfolist
     {
         return $schema
             ->components([
-                Section::make(__('admin.client_information'))
+                Section::make(__('admin.testimonial_content'))
                     ->schema([
                         Grid::make(2)
                             ->schema([
-                                ImageEntry::make('client_image')
-                                    ->label(__('admin.client_image'))
+                                ImageEntry::make('media')
+                                    ->label(__('admin.media'))
                                     ->disk('public')
-                                    ->height(150)
-                                    ->visible(fn (Testimonial $record): bool => $record->client_image && ! Testimonial::isVideoPath($record->client_image)),
-                                TextEntry::make('client_image')
-                                    ->label(__('admin.client_image'))
+                                    ->height(200)
+                                    ->visible(fn (Testimonial $record): bool => $record->media && ! Testimonial::isVideoPath($record->media)),
+                                TextEntry::make('media')
+                                    ->label(__('admin.media'))
                                     ->formatStateUsing(fn (?string $state): ?string => $state ? url("storage/{$state}") : null)
                                     ->url(fn (?string $state): ?string => $state ? url("storage/{$state}") : null)
                                     ->openUrlInNewTab()
-                                    ->visible(fn (Testimonial $record): bool => Testimonial::isVideoPath($record->client_image)),
-                                Grid::make(1)
-                                    ->schema([
-                                        TextEntry::make('client_name')
-                                            ->label(__('admin.client_name'))
-                                            ->size('lg')
-                                            ->weight('bold'),
-                                    ]),
-                            ]),
-                    ]),
-
-                Section::make(__('admin.description'))
-                    ->schema([
-                        TextEntry::make('description')
-                            ->label(__('admin.description'))
-                            ->columnSpanFull(),
-                    ]),
-
-                Section::make(__('admin.project_information'))
-                    ->schema([
-                        Grid::make(2)
-                            ->schema([
-                                ImageEntry::make('project_image')
-                                    ->label(__('admin.project_image'))
-                                    ->disk('public')
-                                    ->height(150)
-                                    ->visible(fn (Testimonial $record): bool => $record->project_image && ! Testimonial::isVideoPath($record->project_image)),
-                                TextEntry::make('project_image')
-                                    ->label(__('admin.project_image'))
-                                    ->formatStateUsing(fn (?string $state): ?string => $state ? url("storage/{$state}") : null)
-                                    ->url(fn (?string $state): ?string => $state ? url("storage/{$state}") : null)
-                                    ->openUrlInNewTab()
-                                    ->visible(fn (Testimonial $record): bool => Testimonial::isVideoPath($record->project_image)),
-                                TextEntry::make('project_name')
-                                    ->label(__('admin.project_name'))
-                                    ->size('lg')
-                                    ->weight('bold'),
+                                    ->visible(fn (Testimonial $record): bool => Testimonial::isVideoPath($record->media)),
                             ]),
                     ]),
 

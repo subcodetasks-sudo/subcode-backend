@@ -115,6 +115,7 @@ return [
     'content_information' => 'Content Information',
     'content' => 'Content',
     'media' => 'Media',
+    'media_type' => 'Media Type',
     'publishing' => 'Publishing',
     'seo' => 'SEO',
     'basic_information' => 'Basic Information',

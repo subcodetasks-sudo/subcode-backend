@@ -6,6 +6,7 @@ return [
     'title' => 'العنوان',
     'description' => 'الوصف',
     'image' => 'الصورة',
+    'video' => 'فيديو',
     'image_hint' => 'الصيغ المدعومة: JPG، PNG. الحد الأقصى للحجم: 1 جيجابايت',
     'media_hint' => 'الصيغ المدعومة: JPG، PNG، WEBP، MP4، WEBM، MOV. الحد الأقصى للحجم: 1 جيجابايت',
     'project_completed' => 'المشروع المكتمل',

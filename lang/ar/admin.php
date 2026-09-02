@@ -115,6 +115,7 @@ return [
     'content_information' => 'معلومات المحتوى',
     'content' => 'المحتوى',
     'media' => 'الوسائط',
+    'media_type' => 'نوع الوسائط',
     'publishing' => 'النشر',
     'seo' => 'تحسين محركات البحث',
     'basic_information' => 'المعلومات الأساسية',

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Testimonials\Tables;
 
+use App\Models\Testimonial;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -20,19 +21,15 @@ class TestimonialsTable
     {
         return $table
             ->columns([
-                ImageColumn::make('client_image')
+                ImageColumn::make('media')
                     ->disk('public')
-                    ->label(__('admin.client_image'))
-                    ->circular()
+                    ->label(__('admin.media'))
                     ->size(50),
-                TextColumn::make('client_name')
-                    ->label(__('admin.client_name'))
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('project_name')
-                    ->label(__('admin.project_name'))
-                    ->searchable()
-                    ->sortable(),
+                TextColumn::make('media_type')
+                    ->label(__('admin.media_type'))
+                    ->getStateUsing(fn (Testimonial $record): string => $record->media
+                        ? (Testimonial::isVideoPath($record->media) ? __('strings.video') : __('strings.image'))
+                        : '-'),
                 ToggleColumn::make('is_active')
                     ->label(__('admin.is_active')),
                 TextColumn::make('created_at')

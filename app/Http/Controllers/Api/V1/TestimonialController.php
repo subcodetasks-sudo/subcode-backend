@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TestimonialResource;
@@ -18,50 +18,37 @@ class TestimonialController extends Controller
 
     private const MEDIA_MIMES = 'jpeg,png,jpg,gif,webp,mp4,webm,mov,avi,mkv';
 
-    /**
-     * Display a listing of testimonials.
-     */
     public function index(): JsonResponse
     {
-        $testimonials = Testimonial::with('meta')->where('is_active', true)->get();
-        
+        $testimonials = Testimonial::where('is_active', true)->get();
+
         return $this->success(
             TestimonialResource::collection($testimonials),
             __('api.testimonials_fetched_successfully')
         );
     }
 
-    /**
-     * Display the specified testimonial.
-     */
     public function show($id): JsonResponse
     {
-        $testimonial = Testimonial::with('meta')->find($id);
-        
-        if (!$testimonial) {
+        $testimonial = Testimonial::find($id);
+
+        if (! $testimonial) {
             return $this->error(
                 __('api.testimonial_not_found'),
                 404
             );
         }
-        
+
         return $this->success(
             new TestimonialResource($testimonial),
             __('api.testimonial_fetched_successfully')
         );
     }
 
-    /**
-     * Store a newly created testimonial.
-     */
     public function store(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'client_name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'client_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
-            'project_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
-            'project_name' => 'required|string|max:255',
+            'media' => 'required|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
             'is_active' => 'boolean',
         ]);
 
@@ -73,16 +60,7 @@ class TestimonialController extends Controller
         }
 
         $data = $validator->validated();
-
-        // Handle client image upload
-        if ($request->hasFile('client_image')) {
-            $data['client_image'] = $request->file('client_image')->store('testimonials/clients', 'public');
-        }
-
-        // Handle project image upload
-        if ($request->hasFile('project_image')) {
-            $data['project_image'] = $request->file('project_image')->store('testimonials/projects', 'public');
-        }
+        $data['media'] = $request->file('media')->store('testimonials', 'public');
 
         $testimonial = Testimonial::create($data);
 
@@ -93,14 +71,11 @@ class TestimonialController extends Controller
         );
     }
 
-    /**
-     * Update the specified testimonial.
-     */
     public function update(Request $request, $id): JsonResponse
     {
-        $testimonial = Testimonial::with('meta')->find($id);
-        
-        if (!$testimonial) {
+        $testimonial = Testimonial::find($id);
+
+        if (! $testimonial) {
             return $this->error(
                 __('api.testimonial_not_found'),
                 404
@@ -108,11 +83,7 @@ class TestimonialController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'client_name' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|required|string',
-            'client_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
-            'project_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
-            'project_name' => 'sometimes|required|string|max:255',
+            'media' => 'sometimes|required|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
             'is_active' => 'boolean',
         ]);
 
@@ -125,22 +96,12 @@ class TestimonialController extends Controller
 
         $data = $validator->validated();
 
-        // Handle client image upload
-        if ($request->hasFile('client_image')) {
-            // Delete old client image
-            if ($testimonial->client_image && Storage::disk('public')->exists($testimonial->client_image)) {
-                Storage::disk('public')->delete($testimonial->client_image);
+        if ($request->hasFile('media')) {
+            if ($testimonial->media && Storage::disk('public')->exists($testimonial->media)) {
+                Storage::disk('public')->delete($testimonial->media);
             }
-            $data['client_image'] = $request->file('client_image')->store('testimonials/clients', 'public');
-        }
 
-        // Handle project image upload
-        if ($request->hasFile('project_image')) {
-            // Delete old project image
-            if ($testimonial->project_image && Storage::disk('public')->exists($testimonial->project_image)) {
-                Storage::disk('public')->delete($testimonial->project_image);
-            }
-            $data['project_image'] = $request->file('project_image')->store('testimonials/projects', 'public');
+            $data['media'] = $request->file('media')->store('testimonials', 'public');
         }
 
         $testimonial->update($data);
@@ -151,28 +112,19 @@ class TestimonialController extends Controller
         );
     }
 
-    /**
-     * Remove the specified testimonial.
-     */
     public function destroy($id): JsonResponse
     {
-        $testimonial = Testimonial::with('meta')->find($id);
-        
-        if (!$testimonial) {
+        $testimonial = Testimonial::find($id);
+
+        if (! $testimonial) {
             return $this->error(
                 __('api.testimonial_not_found'),
                 404
             );
         }
 
-        // Delete client image if exists
-        if ($testimonial->client_image && Storage::disk('public')->exists($testimonial->client_image)) {
-            Storage::disk('public')->delete($testimonial->client_image);
-        }
-
-        // Delete project image if exists
-        if ($testimonial->project_image && Storage::disk('public')->exists($testimonial->project_image)) {
-            Storage::disk('public')->delete($testimonial->project_image);
+        if ($testimonial->media && Storage::disk('public')->exists($testimonial->media)) {
+            Storage::disk('public')->delete($testimonial->media);
         }
 
         $testimonial->delete();
