@@ -81,10 +81,10 @@ class AdminPanelProvider extends PanelProvider
     {
         $compiledTheme = public_path('css/filament/admin-theme.css');
 
-        if (file_exists($compiledTheme)) {
-            return $panel->theme($compiledTheme);
+        if (app()->environment('local') && file_exists(public_path('build/manifest.json'))) {
+            return $panel->viteTheme('resources/css/filament/admin/theme.css');
         }
 
-        return $panel->viteTheme('resources/css/filament/admin/theme.css');
+        return $panel->theme($compiledTheme);
     }
 }
