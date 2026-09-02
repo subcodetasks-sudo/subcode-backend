@@ -8,6 +8,7 @@ use App\Models\Setting;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
 
 class SettingController extends Controller
 {
@@ -15,7 +16,7 @@ class SettingController extends Controller
 
     public function index(): JsonResponse
     {
-        $setting = Setting::query()->first();
+        $setting = Cache::remember('settings.first', 3600, fn () => Setting::query()->first());
 
         if (! $setting) {
             return $this->success([], __('api.settings_fetched_successfully'));
@@ -43,7 +44,7 @@ class SettingController extends Controller
 
     public function scripts(): JsonResponse
     {
-        $setting = Setting::query()->first();
+        $setting = Cache::remember('settings.first', 3600, fn () => Setting::query()->first());
 
         return $this->success([
             'custom_head_scripts' => $setting?->custom_head_scripts,
@@ -56,7 +57,7 @@ class SettingController extends Controller
 
     public function robots(): Response
     {
-        $setting = Setting::query()->first();
+        $setting = Cache::remember('settings.first', 3600, fn () => Setting::query()->first());
         $content = $setting?->robots_txt ?: "User-agent: *\nAllow: /\n";
 
         return response($content, 200, [

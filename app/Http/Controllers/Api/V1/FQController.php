@@ -14,7 +14,7 @@ class FQController extends Controller
 
     public function index(): JsonResponse
     {
-        $fqs = FQ::all();
+        $fqs = FQ::with('meta')->get();
         
         return $this->success(
             FQResource::collection($fqs),
@@ -24,7 +24,7 @@ class FQController extends Controller
 
     public function show($id): JsonResponse
     {
-        $fq = FQ::find($id);
+        $fq = FQ::with('meta')->find($id);
         
         if (!$fq) {
             return $this->error(

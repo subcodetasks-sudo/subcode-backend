@@ -4,6 +4,7 @@ namespace App\Providers;
 use AbdulmajeedJamaan\FilamentTranslatableTabs\TranslatableTabs;
 use App\Models\Redirect;
 use App\Observers\RedirectObserver;
+use App\Services\SocialMetaResolver;
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -15,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(SocialMetaResolver::class);
     }
 
     /**

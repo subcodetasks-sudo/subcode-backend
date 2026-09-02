@@ -23,7 +23,7 @@ class WebsiteController extends Controller
         ]);
         
         $websites = Website::withoutGlobalScopes()
-    ->with(['department', 'advantageWebsites', 'reviewWebsites', 'subscriptions', 'meta'])
+    ->with('meta')
     ->when($request->department_id, fn($q) => $q->where('department_id', $request->department_id))
     ->where('status', 1)
     ->paginate(15);
@@ -74,7 +74,8 @@ class WebsiteController extends Controller
             ]);
         }
 
-        $views_count = $website->visitors()->count();
+        $website->loadCount('visitors');
+        $views_count = $website->visitors_count;
 
         return $this->success(
             [

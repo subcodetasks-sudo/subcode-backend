@@ -11,11 +11,16 @@ use Illuminate\Support\Facades\Storage;
 
 class SocialMetaResolver
 {
+    private ?Setting $settings = null;
+
+    /** @var array<string, SeoSetting|null> */
+    private array $templates = [];
+
     public function resolve(string $contentType, Model $entity, ?string $canonicalUrl = null, ?string $locale = null): array
     {
         $locale = $this->normalizeLocale($locale);
-        $settings = Setting::query()->first();
-        $template = SeoSetting::query()->where('page_key', $contentType)->first();
+        $settings = $this->settings();
+        $template = $this->template($contentType);
         $meta = $this->entityMeta($entity);
 
         $title = $this->pick(
@@ -129,8 +134,8 @@ class SocialMetaResolver
     public function resolvePage(string $pageKey, ?string $locale = null): array
     {
         $locale = $this->normalizeLocale($locale);
-        $settings = Setting::query()->first();
-        $template = SeoSetting::query()->where('page_key', $pageKey)->first();
+        $settings = $this->settings();
+        $template = $this->template($pageKey);
 
         $title = $this->pick(
             $locale,
@@ -230,6 +235,20 @@ class SocialMetaResolver
         }
 
         return $entity->relationLoaded('meta') ? $entity->meta : $entity->meta()->first();
+    }
+
+    private function settings(): ?Setting
+    {
+        return $this->settings ??= Setting::query()->first();
+    }
+
+    private function template(string $pageKey): ?SeoSetting
+    {
+        if (! array_key_exists($pageKey, $this->templates)) {
+            $this->templates[$pageKey] = SeoSetting::query()->where('page_key', $pageKey)->first();
+        }
+
+        return $this->templates[$pageKey];
     }
 
     private function entityImage(Model $entity, string $locale): ?string

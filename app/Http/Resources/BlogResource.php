@@ -32,26 +32,6 @@ class BlogResource extends JsonResource
             'created_at' => $this->created_at,
         ];
 
-        if ($request->route()?->getName() === 'blog.single') {
-            $base['also_like'] = \App\Models\Blog::where('is_active', 1)
-                ->where('status', 'publish')
-                ->where('category_id', $this->category_id)
-                ->where('id', '!=', $this->id)
-                ->inRandomOrder()
-                ->take(3)
-                ->get()
-                ->map(function ($blog) {
-                    return [
-                        'id' => $blog->id,
-                        'title' => $blog->title,
-                        'description' => $blog->description,
-                        'slug' => $blog->slug,
-                        'image' => $blog->image ? url("storage/{$blog->image}") : null,
-                        'created_at' => $blog->created_at,
-                    ];
-                });
-        }
-
         return $base;
     }
 }

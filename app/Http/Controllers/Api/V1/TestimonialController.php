@@ -24,7 +24,7 @@ class TestimonialController extends Controller
      */
     public function index(): JsonResponse
     {
-        $testimonials = Testimonial::where('is_active', true)->get();
+        $testimonials = Testimonial::with('meta')->where('is_active', true)->get();
         
         return $this->success(
             TestimonialResource::collection($testimonials),
@@ -37,7 +37,7 @@ class TestimonialController extends Controller
      */
     public function show($id): JsonResponse
     {
-        $testimonial = Testimonial::find($id);
+        $testimonial = Testimonial::with('meta')->find($id);
         
         if (!$testimonial) {
             return $this->error(
@@ -99,7 +99,7 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, $id): JsonResponse
     {
-        $testimonial = Testimonial::find($id);
+        $testimonial = Testimonial::with('meta')->find($id);
         
         if (!$testimonial) {
             return $this->error(
@@ -157,7 +157,7 @@ class TestimonialController extends Controller
      */
     public function destroy($id): JsonResponse
     {
-        $testimonial = Testimonial::find($id);
+        $testimonial = Testimonial::with('meta')->find($id);
         
         if (!$testimonial) {
             return $this->error(

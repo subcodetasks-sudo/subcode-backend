@@ -13,7 +13,7 @@ class SectorController extends Controller
     use ApiResponse;
     public function index()
     {
-        $sectors = Sector::where('is_active', true)->get();
+        $sectors = Sector::with('meta')->where('is_active', true)->get();
         return $this->success(SectorResource::collection($sectors) , 'Sectors retrieved successfully');
     }
 }

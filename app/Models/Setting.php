@@ -4,12 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Translatable\HasTranslations;
 
 class Setting extends Model
 {
   use HasTranslations;
   use SoftDeletes;
+
+  protected static function booted(): void
+  {
+      static::saved(fn () => Cache::forget('settings.first'));
+  }
 
   protected $fillable = [
     'site_name',

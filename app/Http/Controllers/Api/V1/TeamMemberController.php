@@ -20,7 +20,7 @@ class TeamMemberController extends Controller
      */
     public function index(): JsonResponse
     {
-        $teamMembers = TeamMember::where('is_active', true)->get();
+        $teamMembers = TeamMember::with('meta')->where('is_active', true)->get();
         
         return $this->success(
             TeamMemberResource::collection($teamMembers),
@@ -33,7 +33,7 @@ class TeamMemberController extends Controller
      */
     public function show($id): JsonResponse
     {
-        $teamMember = TeamMember::find($id);
+        $teamMember = TeamMember::with('meta')->find($id);
         
         if (!$teamMember) {
             return $this->error(

@@ -14,7 +14,7 @@ class PartnerSuccessController extends Controller
 
     public function index(): JsonResponse
     {
-        $partnerSuccesses = PartnerSuccess::all();
+        $partnerSuccesses = PartnerSuccess::with('meta')->get();
         
         return $this->success(
             PartnerSuccessResource::collection($partnerSuccesses),
@@ -24,7 +24,7 @@ class PartnerSuccessController extends Controller
 
     public function show($id): JsonResponse
     {
-        $partnerSuccess = PartnerSuccess::find($id);
+        $partnerSuccess = PartnerSuccess::with('meta')->find($id);
         
         if (!$partnerSuccess) {
             return $this->error(

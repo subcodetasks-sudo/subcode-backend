@@ -3,11 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Translatable\HasTranslations;
 
 class SeoSetting extends Model
 {
     use HasTranslations;
+
+    protected static function booted(): void
+    {
+        static::saved(fn () => Cache::forget('seo_settings.all'));
+    }
 
     protected $fillable = [
         'page_key',

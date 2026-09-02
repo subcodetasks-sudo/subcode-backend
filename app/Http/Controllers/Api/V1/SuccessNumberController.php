@@ -19,7 +19,7 @@ class SuccessNumberController extends Controller
      */
     public function index(): JsonResponse
     {
-        $successNumbers = SuccessNumber::where('is_active', true)->get();
+        $successNumbers = SuccessNumber::with('meta')->where('is_active', true)->get();
         
         return $this->success(
             SuccessNumberResource::collection($successNumbers),
@@ -32,7 +32,7 @@ class SuccessNumberController extends Controller
      */
     public function show($id): JsonResponse
     {
-        $successNumber = SuccessNumber::find($id);
+        $successNumber = SuccessNumber::with('meta')->find($id);
         
         if (!$successNumber) {
             return $this->error(

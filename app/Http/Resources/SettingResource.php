@@ -6,6 +6,7 @@ use App\Http\Resources\Concerns\WithSeoMeta;
 use App\Models\SeoSetting;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 
 class SettingResource extends JsonResource
 {
@@ -69,7 +70,9 @@ class SettingResource extends JsonResource
                     'twitter_card_default' => $this->twitter_card_default,
                     'facebook_app_id' => $this->facebook_app_id,
                 ],
-                'pages' => SeoSettingResource::collection(SeoSetting::all()),
+                'pages' => SeoSettingResource::collection(
+                    Cache::remember('seo_settings.all', 3600, fn () => SeoSetting::all())
+                ),
             ],
             'scripts' => [
                 'custom_head_scripts' => $this->custom_head_scripts,

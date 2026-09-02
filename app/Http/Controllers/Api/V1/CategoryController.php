@@ -32,7 +32,7 @@ class CategoryController extends Controller
                 $query->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(slug, '$.en')) = ?", [$slugOrId])
                       ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(slug, '$.ar')) = ?", [$slugOrId]);
             }
-        })->with(['blogs.meta', 'meta'])->first();
+        })->with(['blogs.meta', 'blogs.category', 'meta'])->first();
         
         if (!$category) {
             return $this->error(

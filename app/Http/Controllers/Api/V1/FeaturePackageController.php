@@ -14,7 +14,7 @@ class FeaturePackageController extends Controller
 
     public function index(): JsonResponse
     {
-        $featurePackages = FeaturePackage::all();
+        $featurePackages = FeaturePackage::with('meta')->get();
         
         return $this->success(
             FeaturePackageResource::collection($featurePackages),

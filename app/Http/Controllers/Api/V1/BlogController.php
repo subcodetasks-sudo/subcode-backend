@@ -75,7 +75,7 @@ class BlogController extends Controller
     {
         $timeNow = now()->setTimezone(config('app.timezone'))->toDateTimeString();
 
-        return Blog::with(['category', 'admins'])->where(function ($query) use ($timeNow) {
+        return Blog::with(['category', 'meta', 'admins'])->where(function ($query) use ($timeNow) {
             $query->where(function ($q) {
                 $q->where('status', 'publish')
                     ->where('is_active', 1);
@@ -100,8 +100,28 @@ class BlogController extends Controller
             );
         }
 
+        $alsoLike = Blog::query()
+            ->where('is_active', 1)
+            ->where('status', 'publish')
+            ->where('category_id', $blog->category_id)
+            ->where('id', '!=', $blog->id)
+            ->inRandomOrder()
+            ->take(3)
+            ->get(['id', 'title', 'description', 'slug', 'image', 'created_at'])
+            ->map(fn (Blog $related) => [
+                'id' => $related->id,
+                'title' => $related->title,
+                'description' => $related->description,
+                'slug' => $related->slug,
+                'image' => $related->image ? url("storage/{$related->image}") : null,
+                'created_at' => $related->created_at,
+            ]);
+
+        $blogPayload = (new BlogResource($blog))->toArray(request());
+        $blogPayload['also_like'] = $alsoLike;
+
         return $this->success([
-            'blog' => new BlogResource($blog),
+            'blog' => $blogPayload,
         ], __('api.retrieve_blog'));
     }
 
@@ -129,12 +149,21 @@ class BlogController extends Controller
         return Blog::when($search, function ($query) use ($search) {
             $query->where('title', 'like', "%{$search}%")
                 ->orWhere('description', 'like', "%{$search}%");
-        })->get();
+        })
+            ->with(['category', 'meta'])
+            ->get();
     }
 
     public function categoryWithBlog()
     {
-        $categories = Category::with('blogs')->get();
+        $categories = Category::with([
+            'meta',
+            'blogs' => fn ($query) => $query
+                ->where('is_active', 1)
+                ->where('status', 'publish'),
+            'blogs.meta',
+            'blogs.category',
+        ])->get();
 
         if ($categories->isEmpty()) {
             return $this->success(
@@ -149,7 +178,7 @@ class BlogController extends Controller
                 'name' => $category->name,
                 'slug' => $category->slug,
                 'image' => $category->image ? url("storage/{$category->image}") : null,
-                'blogs' => BlogResource::collection($category->blogs->where('is_active', 1)->where('status', 'publish')),
+                'blogs' => BlogResource::collection($category->blogs),
             ];
         });
 
@@ -161,7 +190,14 @@ class BlogController extends Controller
 
     public function filterCategory($id)
     {
-        $category = Category::with('blogs')->find($id);
+        $category = Category::with([
+            'meta',
+            'blogs' => fn ($query) => $query
+                ->where('is_active', 1)
+                ->where('status', 'publish'),
+            'blogs.meta',
+            'blogs.category',
+        ])->find($id);
 
         if (! $category) {
             return $this->error(

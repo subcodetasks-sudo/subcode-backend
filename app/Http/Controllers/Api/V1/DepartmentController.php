@@ -14,7 +14,12 @@ class DepartmentController extends Controller
 
     public function index(): JsonResponse
     {
-        $departments = Department::with(['projects.meta', 'meta'])->get();
+        $departments = Department::with([
+            'meta',
+            'projects' => fn ($query) => $query->where('status', 1),
+            'projects.meta',
+            'projects.department',
+        ])->get();
 
         return $this->success(
             DepartmentResource::collection($departments),
@@ -26,7 +31,12 @@ class DepartmentController extends Controller
     {
         $lang = app()->getLocale();
         $department = Department::where("slug->{$lang}", $slug)
-            ->with(['projects.meta', 'meta'])
+            ->with([
+                'meta',
+                'projects' => fn ($query) => $query->where('status', 1),
+                'projects.meta',
+                'projects.department',
+            ])
             ->first();
 
         if (! $department) {
