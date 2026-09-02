@@ -26,11 +26,12 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        $panel = $this->configureTheme($panel);
+
         return $panel
             ->default()
             ->id('admin')
             ->path('admin')
-            ->viteTheme('resources/css/filament/admin/theme.css')
             ->authGuard('admin')
             ->login()
             ->brandName('Subcode')
@@ -74,5 +75,16 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+
+    protected function configureTheme(Panel $panel): Panel
+    {
+        $compiledTheme = public_path('css/filament/admin-theme.css');
+
+        if (app()->environment('local') && file_exists(public_path('build/manifest.json'))) {
+            return $panel->viteTheme('resources/css/filament/admin/theme.css');
+        }
+
+        return $panel->theme($compiledTheme);
     }
 }
