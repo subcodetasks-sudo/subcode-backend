@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
                 return null;
             }
 
-            return $user->hasRole('super_admin', 'admin') ? true : null;
+            return $user->isSuperAdmin() ? true : null;
         });
 
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {

@@ -13,6 +13,20 @@ class Admin extends Authenticatable
     use HasRoles, SoftDeletes, Notifiable;
 
     protected string $guard_name = 'admin';
+
+    public function getDefaultGuardName(): string
+    {
+        return 'admin';
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        if ($this->role === 'super_admin') {
+            return true;
+        }
+
+        return $this->hasRole('super_admin', 'admin') || $this->hasRole('super_admin');
+    }
     
     protected $fillable = [
         'name',
@@ -40,7 +54,7 @@ class Admin extends Authenticatable
     
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        return (bool) $this->is_active;
     }
     
     public function canComment(): bool
@@ -71,8 +85,8 @@ class Admin extends Authenticatable
                 
                 // Check if role exists before accessing permissions
                 if ($role) {
-                    // Assign new role
-                    $model->assignRole($model->role);
+                    // Assign new role using the resolved role model (correct guard).
+                    $model->assignRole($role);
                     
                     // Get all permissions for the new role
                     $permissions = $role->permissions;

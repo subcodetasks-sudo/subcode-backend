@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\App;
 use App\Enum\VisitorTypeEnum;
 class MonthlyProfitChart extends ChartWidget
 {
+    public static function canView(): bool
+    {
+        return auth('admin')->check();
+    }
+
     public function getHeading(): string
     {
         return __('strings.visitors_statistics');
