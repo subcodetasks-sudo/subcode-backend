@@ -79,12 +79,18 @@ class AdminPanelProvider extends PanelProvider
 
     protected function configureTheme(Panel $panel): Panel
     {
-        $compiledTheme = public_path('css/filament/admin-theme.css');
+        $compiledTheme = 'css/filament/admin-theme.css';
 
         if (app()->environment('local') && file_exists(public_path('build/manifest.json'))) {
             return $panel->viteTheme('resources/css/filament/admin/theme.css');
         }
 
-        return $panel->theme($compiledTheme);
+        if (file_exists(public_path($compiledTheme))) {
+            // Filament expects a public URL (asset()), not a filesystem path (public_path()).
+            // Using public_path() resolves to the default /css/app.css theme instead.
+            return $panel->theme(asset($compiledTheme));
+        }
+
+        return $panel->viteTheme('resources/css/filament/admin/theme.css');
     }
 }
