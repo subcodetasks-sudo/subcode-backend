@@ -212,6 +212,8 @@ return [
         'exclude' => [
             \Filament\Widgets\AccountWidget::class,
             \Filament\Widgets\FilamentInfoWidget::class,
+            \App\Filament\Widgets\AOverview::class,
+            \App\Filament\Widgets\MonthlyProfitChart::class,
         ],
     ],
 

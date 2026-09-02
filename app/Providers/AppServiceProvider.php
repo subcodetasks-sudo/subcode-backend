@@ -2,6 +2,7 @@
 namespace App\Providers;
 
 use AbdulmajeedJamaan\FilamentTranslatableTabs\TranslatableTabs;
+use App\Models\Admin;
 use App\Models\Redirect;
 use App\Observers\RedirectObserver;
 use App\Services\SocialMetaResolver;
@@ -29,7 +30,11 @@ class AppServiceProvider extends ServiceProvider
         // Implicitly grant "Super Admin" role all permissions
         // This works in the app by using gate-related functions like auth()->user->can() and @can()
         Gate::before(function ($user, $ability) {
-            return $user->hasRole('super_admin') ? true : null;
+            if (! $user instanceof Admin) {
+                return null;
+            }
+
+            return $user->hasRole('super_admin', 'admin') ? true : null;
         });
 
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {

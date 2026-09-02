@@ -11,6 +11,8 @@ use Filament\Panel;
 class Admin extends Authenticatable
 {
     use HasRoles, SoftDeletes, Notifiable;
+
+    protected string $guard_name = 'admin';
     
     protected $fillable = [
         'name',
@@ -62,7 +64,10 @@ class Admin extends Authenticatable
                 $model->syncRoles([]);
                 
                 // Find the role
-                $role = Role::where('name', $model->role)->first();
+                $role = Role::query()
+                    ->where('name', $model->role)
+                    ->where('guard_name', 'admin')
+                    ->first();
                 
                 // Check if role exists before accessing permissions
                 if ($role) {
