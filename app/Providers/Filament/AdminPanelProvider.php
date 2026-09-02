@@ -79,16 +79,23 @@ class AdminPanelProvider extends PanelProvider
 
     protected function configureTheme(Panel $panel): Panel
     {
-        $compiledTheme = 'css/filament/admin-theme.css';
+        $compiledThemePath = public_path('css/filament/admin-theme.css');
 
-        if (app()->environment('local') && file_exists(public_path('build/manifest.json'))) {
+        // Production always uses the committed compiled theme — never Vite build assets.
+        if (! app()->environment('local')) {
+            $version = file_exists($compiledThemePath) ? filemtime($compiledThemePath) : time();
+
+            return $panel->theme(asset('css/filament/admin-theme.css?v='.$version));
+        }
+
+        // Local dev with Vite HMR (npm run dev).
+        if (file_exists(public_path('hot'))) {
             return $panel->viteTheme('resources/css/filament/admin/theme.css');
         }
 
-        if (file_exists(public_path($compiledTheme))) {
-            // Filament expects a public URL (asset()), not a filesystem path (public_path()).
-            // Using public_path() resolves to the default /css/app.css theme instead.
-            return $panel->theme(asset($compiledTheme));
+        // Local without HMR: prefer compiled theme if available.
+        if (file_exists($compiledThemePath)) {
+            return $panel->theme(asset('css/filament/admin-theme.css?v='.filemtime($compiledThemePath)));
         }
 
         return $panel->viteTheme('resources/css/filament/admin/theme.css');
