@@ -20,6 +20,7 @@ class TestimonialForm
                             ->disk('public')
                             ->directory('testimonials')
                             ->required()
+                            ->imageEditor()
                             ->acceptedFileTypes([
                                 'image/jpeg',
                                 'image/png',
