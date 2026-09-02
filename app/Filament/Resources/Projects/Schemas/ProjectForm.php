@@ -52,6 +52,17 @@ class ProjectForm
                                         ->required()
                                         ->preload(),
 
+                                    Select::make('country_id')
+                                        ->label(__('strings.country'))
+                                        ->relationship(
+                                            'country',
+                                            'name',
+                                            fn ($query) => $query->where('is_active', true),
+                                        )
+                                        ->searchable()
+                                        ->required()
+                                        ->preload(),
+
                                     FileUpload::make('main_image')
                                         ->label(__('strings.main_image'))
                                         ->disk('public')
@@ -67,7 +78,6 @@ class ProjectForm
                                         ->multiple()
                                         ->panelLayout('grid')
                                         ->image()
-                                        ->maxSize(2048)
                                         ->helperText(__('strings.image_hint'))
                                         ->columnSpanFull(),
 
@@ -124,7 +134,6 @@ class ProjectForm
                                         ->imagePreviewHeight('100')
                                         ->enableReordering()
                                         ->enableDownload()
-                                        ->maxSize(2048)
                                         ->helperText(__('strings.image_hint'))
                                         ->columnSpanFull(),
                                 ]),
@@ -197,14 +206,12 @@ class ProjectForm
                                                 ->label(__('strings.user_image'))
                                                 ->disk('public')
                                                 ->image()
-                                                ->maxSize(2048)
                                                 ->helperText(__('strings.image_hint')),
 
                                             FileUpload::make('project_image')
                                                 ->label(__('strings.project_image'))
                                                 ->disk('public')
                                                 ->image()
-                                                ->maxSize(2048)
                                                 ->helperText(__('strings.image_hint'))
                                                 ->required(),
                                         ]),

@@ -18,11 +18,16 @@ class ProjectController extends Controller
     {
         $request->validate([
             'department_id' => 'sometimes|integer|exists:departments,id',
+            'country_id' => 'sometimes|integer|exists:countries,id',
         ]);
-        $projects = Project::with('meta');
+        $projects = Project::with(['meta', 'country']);
 
         if ($request->has('department_id')) {
             $projects->where('department_id', $request->department_id);
+        }
+
+        if ($request->has('country_id')) {
+            $projects->where('country_id', $request->country_id);
         }
         $projects = $projects->where('status', 1)->paginate(15);
 
@@ -34,7 +39,7 @@ class ProjectController extends Controller
 
     public function show($slugOrId): JsonResponse
     {
-        $project = Project::with(['department', 'advantageProjects', 'reviewProjects', 'meta'])
+        $project = Project::with(['department', 'country', 'advantageProjects', 'reviewProjects', 'meta'])
             ->findBySlugOrId($slugOrId);
 
         if (! $project) {
@@ -54,7 +59,7 @@ class ProjectController extends Controller
     public function specialProjects(): JsonResponse
     {
        
-        $projects = Project::with('meta')->where('is_special', true)->paginate(15);
+        $projects = Project::with(['meta', 'country'])->where('is_special', true)->paginate(15);
 
 
         return $this->PaginationResponse(

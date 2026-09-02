@@ -40,6 +40,9 @@ class ProjectInfolist
                                     TextEntry::make('department.name')
                                         ->label(__('strings.department')),
 
+                                    TextEntry::make('country.name')
+                                        ->label(__('strings.country')),
+
                                     IconEntry::make('status')
                                         ->label(__('strings.status'))
                                         ->boolean()

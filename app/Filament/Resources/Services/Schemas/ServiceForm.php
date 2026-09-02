@@ -79,7 +79,6 @@ class ServiceForm
                                     ->disk('public')
                                     ->image()
                                     ->required()
-                                    ->maxSize(2048)
                                     ->helperText(__('strings.image_hint'))
                                     ->columnSpanFull(),
 

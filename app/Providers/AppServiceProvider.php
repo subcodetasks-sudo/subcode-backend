@@ -5,7 +5,9 @@ use AbdulmajeedJamaan\FilamentTranslatableTabs\TranslatableTabs;
 use App\Models\Redirect;
 use App\Observers\RedirectObserver;
 use App\Services\SocialMetaResolver;
+use App\Support\UploadLimits;
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -48,6 +50,10 @@ class AppServiceProvider extends ServiceProvider
                     'tr' => __('strings.tr'),
                 ])
                 ->locales(['ar', 'en', 'tr']);
+        });
+
+        FileUpload::configureUsing(function (FileUpload $component): void {
+            $component->maxSize(UploadLimits::maxKb());
         });
 
         Redirect::observe(RedirectObserver::class);

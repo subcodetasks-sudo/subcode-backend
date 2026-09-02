@@ -29,11 +29,16 @@ class ProjectResource extends JsonResource
             'link_project' => $this->link_project,
             'status' => $this->status,
             'tags' => $this->tags,
-            'department' => [
+            'department' => $this->when($this->department, fn () => [
                 'id' => $this->department->id,
                 'name' => $this->department->name,
                 'slug' => $this->department->slug,
-            ],
+            ]),
+            'country' => $this->when($this->country, fn () => [
+                'id' => $this->country->id,
+                'name' => $this->country->name,
+                'code' => $this->country->code,
+            ]),
             'advantage_projects' => $this->whenLoaded('advantageProjects', function () {
                 return AdvantageProjectResource::collection($this->advantageProjects);
             }),

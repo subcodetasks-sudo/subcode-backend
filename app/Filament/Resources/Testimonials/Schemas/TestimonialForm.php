@@ -35,7 +35,6 @@ class TestimonialForm
                                 'video/webm',
                                 'video/quicktime',
                             ])
-                            ->maxSize(51200)
                             ->helperText(__('strings.media_hint')),
                         SeoSection::imageAltField('client_image_alt'),
                     ])->columns(2)->columnSpanFull(),
@@ -69,7 +68,6 @@ class TestimonialForm
                                 'video/webm',
                                 'video/quicktime',
                             ])
-                            ->maxSize(51200)
                             ->helperText(__('strings.media_hint')),
                         SeoSection::imageAltField('project_image_alt'),
                         Toggle::make('is_active')

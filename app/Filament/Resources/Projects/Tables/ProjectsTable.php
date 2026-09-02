@@ -40,12 +40,23 @@ class ProjectsTable
                 TextColumn::make('department.name')
                     ->label(__('strings.department'))
                     ->searchable(),
+
+                TextColumn::make('country.name')
+                    ->label(__('strings.country'))
+                    ->searchable(),
                
             ])
             ->filters([
                 SelectFilter::make('department_id')
                     ->label(__('strings.department'))
                     ->relationship('department', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable(),
+
+                SelectFilter::make('country_id')
+                    ->label(__('strings.country'))
+                    ->relationship('country', 'name')
                     ->multiple()
                     ->preload()
                     ->searchable(),

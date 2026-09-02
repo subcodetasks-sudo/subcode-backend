@@ -29,7 +29,6 @@ class AchievementForm
                             ->required()
                             ->disk('public')
                             ->directory('achievements')
-                            ->maxSize(2048)
                             ->helperText(__('strings.image_hint'))
                             ->columnSpanFull(),
                     ]),

@@ -13,7 +13,7 @@ class Project extends Model
     use HasMetaSeo;
     use HasTranslations;
 
-    protected $fillable = ['name', 'slug', 'description', 'image', 'link_project', 'department_id', 'status', 'caption', 'main_image', 'main_image_alt', 'images', 'tags', 'long_description', 'technologies', 'is_special'];
+    protected $fillable = ['name', 'slug', 'description', 'image', 'link_project', 'department_id', 'country_id', 'status', 'caption', 'main_image', 'main_image_alt', 'images', 'tags', 'long_description', 'technologies', 'is_special'];
 
     public $translatable = ['name', 'description', 'caption', 'long_description', 'slug', 'tags', 'main_image_alt'];
 
@@ -33,6 +33,11 @@ class Project extends Model
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 
     public function advantageProjects()

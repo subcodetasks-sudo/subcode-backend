@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             // FQSeeder::class,
             // TestimonialSeeder::class,
             SettingSeeder::class,
-            SeoSettingSeeder::class,
+            CountrySeeder::class,
             SeoSettingSeeder::class,
         ]);
 

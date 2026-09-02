@@ -35,7 +35,6 @@ class SuccessNumberForm
                             ->disk('public')
                             ->image()
                             ->required()
-                            ->maxSize(2048)
                             ->columnSpanFull()->helperText(__('strings.image_hint')),
                         
                         Toggle::make('is_active')

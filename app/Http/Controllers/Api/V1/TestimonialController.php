@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TestimonialResource;
 use App\Models\Testimonial;
+use App\Support\UploadLimits;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,8 +17,6 @@ class TestimonialController extends Controller
     use ApiResponse;
 
     private const MEDIA_MIMES = 'jpeg,png,jpg,gif,webp,mp4,webm,mov,avi,mkv';
-
-    private const MEDIA_MAX_KB = 51200;
 
     /**
      * Display a listing of testimonials.
@@ -60,8 +59,8 @@ class TestimonialController extends Controller
         $validator = Validator::make($request->all(), [
             'client_name' => 'required|string|max:255',
             'description' => 'required|string',
-            'client_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.self::MEDIA_MAX_KB,
-            'project_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.self::MEDIA_MAX_KB,
+            'client_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
+            'project_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
             'project_name' => 'required|string|max:255',
             'is_active' => 'boolean',
         ]);
@@ -111,8 +110,8 @@ class TestimonialController extends Controller
         $validator = Validator::make($request->all(), [
             'client_name' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|required|string',
-            'client_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.self::MEDIA_MAX_KB,
-            'project_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.self::MEDIA_MAX_KB,
+            'client_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
+            'project_image' => 'nullable|file|mimes:'.self::MEDIA_MIMES.'|max:'.UploadLimits::maxKb(),
             'project_name' => 'sometimes|required|string|max:255',
             'is_active' => 'boolean',
         ]);

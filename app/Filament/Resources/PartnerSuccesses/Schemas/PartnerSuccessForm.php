@@ -29,7 +29,6 @@ class PartnerSuccessForm
                     ->image()
                     ->required()
                     ->disk('public')
-                    ->maxSize(2048)
                     ->columnSpanFull()->helperText(__('strings.image_hint')),
                 SeoSection::imageAltField()
                     ->columnSpanFull(),

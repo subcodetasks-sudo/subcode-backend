@@ -74,7 +74,6 @@ class WebsiteForm
                                         ->panelLayout('grid')
                                         ->image()
                                         ->required()
-                                        ->maxSize(2048) // 2MB
                                         ->helperText(__('strings.image_hint'))
                                         ->columnSpanFull(),
 
@@ -129,7 +128,6 @@ class WebsiteForm
                                         ->enableReordering()
                                         ->enableDownload()
                                         ->required()
-                                        ->maxSize(2048) // 2MB
                                         ->helperText(__('strings.image_hint'))
                                         ->columnSpanFull(),
                                 ]),
@@ -203,7 +201,6 @@ class WebsiteForm
                                                 ->label(__('strings.user_image'))
                                                 ->disk('public')
                                                 ->image()
-                                                ->maxSize(2048) // 2MB
                                                 ->helperText(__('strings.image_hint'))
                                                 ->required(),
 
@@ -211,7 +208,6 @@ class WebsiteForm
                                                 ->label(__('strings.project_image'))
                                                 ->disk('public')
                                                 ->image()
-                                                ->maxSize(2048) // 2MB
                                                 ->helperText(__('strings.image_hint'))
                                                 ->required(),
                                         ]),

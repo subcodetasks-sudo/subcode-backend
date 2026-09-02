@@ -19,6 +19,11 @@ class LiteProjectResource extends JsonResource
             'description' => $this->description,
             'link_project' => $this->link_project,
             'caption' => $this->caption,
+            'country' => $this->when($this->country, fn () => [
+                'id' => $this->country->id,
+                'name' => $this->country->name,
+                'code' => $this->country->code,
+            ]),
             'main_image' => $this->imageWithAlt($this->main_image, $this->main_image_alt),
             'meta' => $this->seoMeta(),
         ];

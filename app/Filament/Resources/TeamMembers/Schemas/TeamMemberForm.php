@@ -29,7 +29,6 @@ class TeamMemberForm
                             ->label(__('admin.image'))
                             ->disk('public')
                             ->image()
-                            ->maxSize(2048)
                             ->helperText(__('strings.image_hint')),
                         SeoSection::imageAltField(),
                         Toggle::make('is_active')
