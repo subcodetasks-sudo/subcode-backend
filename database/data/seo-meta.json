@@ -1,0 +1,73 @@
+{
+  "services": [
+    { "id": 1, "meta": {
+      "ar": { "meta_title": "خدمات برمجة المواقع والتطبيقات والأنظمة | SubCode", "meta_description": "خدمات SubCode في برمجة المواقع والمنصات، تطبيقات أندرويد وiOS، والأنظمة المخصصة. حلول تقنية متكاملة تدعم نمو أعمالك. اطلب استشارة مجانية." },
+      "en": { "meta_title": "Web, App & Custom Software Development | SubCode", "meta_description": "SubCode builds websites, platforms, Android & iOS apps and custom systems. End-to-end technical solutions that support your business growth. Get a free consultation." },
+      "tr": { "meta_title": "Web, Uygulama ve Özel Yazılım Geliştirme | SubCode", "meta_description": "SubCode; web siteleri, platformlar, Android ve iOS uygulamaları ve özel sistemler geliştirir. İşinizi büyüten uçtan uca çözümler. Ücretsiz danışmanlık alın." }
+    }},
+    { "id": 2, "meta": {
+      "ar": { "meta_title": "خدمات التسويق الرقمي وتحسين محركات البحث SEO | SubCode", "meta_description": "خدمات SubCode للتسويق الرقمي: تحسين محركات البحث SEO، إدارة حملات جوجل والسوشيال ميديا، وصناعة المحتوى لزيادة ظهورك ومبيعاتك. اطلب خطة تسويقية مجانية." },
+      "en": { "meta_title": "Digital Marketing & SEO Services | SubCode", "meta_description": "SubCode digital marketing: SEO, Google & social media ad campaigns, and content that grow your visibility, traffic and sales. Request a free plan." },
+      "tr": { "meta_title": "Dijital Pazarlama ve SEO Hizmetleri | SubCode", "meta_description": "SubCode dijital pazarlama: SEO, Google ve sosyal medya reklamları ve içerik ile görünürlüğünüzü ve satışlarınızı artırın. Ücretsiz plan isteyin." }
+    }},
+    { "id": 4, "meta": {
+      "ar": { "meta_title": "إدارة السيرفرات والاستضافة والبنية التحتية | SubCode", "meta_description": "خدمات SubCode لإدارة السيرفرات، الاستضافة السحابية، أمن البنية التحتية، والمراقبة على مدار الساعة لضمان استقرار وسرعة أنظمتك. تواصل معنا الآن." },
+      "en": { "meta_title": "Server Management, Hosting & Infrastructure | SubCode", "meta_description": "SubCode server management, cloud hosting, infrastructure security and 24/7 monitoring to keep your systems stable, fast and secure. Talk to us today." },
+      "tr": { "meta_title": "Sunucu Yönetimi, Hosting ve Altyapı | SubCode", "meta_description": "SubCode sunucu yönetimi, bulut hosting, altyapı güvenliği ve 7/24 izleme ile sistemlerinizi kararlı, hızlı ve güvenli tutar. Bugün bize ulaşın." }
+    }},
+    { "id": 5, "meta": {
+      "ar": { "meta_title": "حلول الذكاء الاصطناعي وأتمتة الأعمال | SubCode", "meta_description": "خدمات SubCode في الذكاء الاصطناعي: روبوتات المحادثة، أتمتة العمليات، تحليل البيانات، ودمج نماذج الـ AI في أنظمتك لرفع الكفاءة وخفض التكاليف." },
+      "en": { "meta_title": "AI Solutions & Business Automation | SubCode", "meta_description": "SubCode AI services: chatbots, process automation, data analysis and AI model integration into your systems to boost efficiency and cut costs." },
+      "tr": { "meta_title": "Yapay Zeka Çözümleri ve İş Otomasyonu | SubCode", "meta_description": "SubCode yapay zeka hizmetleri: sohbet botları, süreç otomasyonu, veri analizi ve sistemlere AI entegrasyonu ile verimliliği artırın, maliyeti düşürün." }
+    }}
+  ],
+  "projects": [
+    { "id": 7, "slug": "mefmcare", "meta": {
+      "ar": { "meta_title": "mefmcare | نظام إدارة نظافة وصيانة الوحدات السكنية", "meta_description": "mefmcare منصة لإدارة نظافة وصيانة الوحدات السكنية والضيافة، من تطوير Subcode. تريد نظاماً مشابهاً لمشروعك، تواصل مع Subcode وابدأ اليوم." },
+      "en": { "meta_title": "mefmcare | Property Housekeeping & Maintenance System", "meta_description": "mefmcare, a platform to manage housekeeping and maintenance for residential and hospitality units, built by Subcode. Want a similar system? Contact Subcode." },
+      "tr": { "meta_title": "mefmcare | Konut Temizlik ve Bakım Yönetim Sistemi", "meta_description": "Konut ve konaklama birimleri için temizlik ve bakım yönetim platformu — Subcode tarafından geliştirildi. Benzer bir sistem için Subcode ile iletişime geçin." }
+    }},
+    { "id": 8, "slug": "refada", "meta": {
+      "ar": { "meta_title": "رفادة | منصة رقمية لتنظيم العمل الإنساني في الأزمات", "meta_description": "رفادة منصة محايدة لحوكمة العمل الإنساني في بيئات الأزمات عبر البيانات الموثوقة وإتاحة التحقق، من تطوير Subcode. تواصل مع Subcode لمشروعك." },
+      "en": { "meta_title": "Refada | Digital Platform for Humanitarian Coordination", "meta_description": "Refada, a neutral platform governing humanitarian work in crisis settings through trusted data and verification, built by Subcode. Contact Subcode for your project." },
+      "tr": { "meta_title": "Refada | İnsani Yardım Koordinasyon Platformu", "meta_description": "Kriz ortamlarında insani yardımı güvenilir veri ve doğrulama ile yöneten tarafsız platform — Subcode tarafından geliştirildi. Projeniz için bize ulaşın." }
+    }},
+    { "id": 13, "slug": "futureak-ademy", "meta": {
+      "ar": { "meta_title": "أكاديمية المستقبل | منصة خدمات تعليمية للطلاب", "meta_description": "أكاديمية المستقبل منصة خدمات تعليمية شاملة لطلاب الجامعات والمدارس، من تطوير Subcode. تريد منصة تعليمية لمشروعك، تواصل مع Subcode." },
+      "en": { "meta_title": "Future Academy | Educational Services Platform for Students", "meta_description": "Future Academy, a platform offering comprehensive educational services for university and school students, built by Subcode. Need an e-learning platform? Contact Subcode." },
+      "tr": { "meta_title": "Future Academy | Öğrenciler için Eğitim Platformu", "meta_description": "Üniversite ve okul öğrencileri için kapsamlı eğitim hizmetleri platformu — Subcode tarafından geliştirildi. E-öğrenme platformu için bize ulaşın." }
+    }},
+    { "id": 14, "slug": "alawaji", "meta": {
+      "ar": { "meta_title": "العواجي | منصة خدمات ومناسبات العائلة", "meta_description": "منصة العواجي لإدارة خدمات ومناسبات أفراد العائلة: التهاني، النعي، التسجيل، والدعم، من تطوير Subcode. تواصل مع Subcode لمنصة عائلتك." },
+      "en": { "meta_title": "Alawaji | Family Services & Events Platform", "meta_description": "Alawaji, a platform for family services and events — greetings, obituaries, registration and support, built by Subcode. Contact Subcode for your family platform." },
+      "tr": { "meta_title": "Alawaji | Aile Hizmetleri ve Etkinlikler Platformu", "meta_description": "Alawaji, aile hizmetleri ve etkinlikleri için bir platform — tebrikler, vefat ilanları, kayıt ve destek. Subcode tarafından geliştirildi. Subcode ile iletişime geçin." }
+    }},
+    { "id": 19, "slug": "iwash", "meta": {
+      "ar": { "meta_title": "iWash | نظام حجز وإدارة مغسلة سيارات متنقلة", "meta_description": "iWash نظام إلكتروني لحجز وإدارة مغاسل السيارات المتنقلة في قطر: حجز الموعد، متابعة الحالة، وتأكيد الوصول عبر QR، من تطوير Subcode. تواصل مع Subcode." },
+      "en": { "meta_title": "iWash | Mobile Car Wash Booking & Management System", "meta_description": "iWash, an online system to book and manage a mobile car wash in Qatar — appointments, live status and QR check-in, built by Subcode. Contact Subcode." },
+      "tr": { "meta_title": "iWash | Mobil Oto Yıkama Rezervasyon Sistemi", "meta_description": "Katar'da mobil oto yıkama rezervasyonu ve yönetimi için çevrimiçi sistem — randevu, canlı durum ve QR giriş. Subcode tarafından geliştirildi. Bize ulaşın." }
+    }},
+    { "id": 15, "slug": "ruuwad", "meta": {
+      "ar": { "meta_title": "رواد | خدمات الدعم اللوجستي المتكامل", "meta_description": "رواد لتقديم خدمات الدعم اللوجستي الشاملة عالية الجودة، موقع من تطوير Subcode. تريد موقعاً أو نظاماً لشركتك اللوجستية، تواصل مع Subcode." },
+      "en": { "meta_title": "Ruuwad | Integrated Logistics Support Services", "meta_description": "Ruuwad delivers comprehensive, high-quality logistics support services. Website built by Subcode. Need a site or system for your logistics company? Contact Subcode." },
+      "tr": { "meta_title": "Ruuwad | Entegre Lojistik Destek Hizmetleri", "meta_description": "Kapsamlı ve yüksek kaliteli lojistik destek hizmetleri. Web sitesi Subcode tarafından geliştirildi. Lojistik firmanız için site mi lazım? Bize ulaşın." }
+    }},
+    { "id": 17, "slug": "albararyind", "meta": {
+      "ar": { "meta_title": "البراري للصناعة | تصنيع ماكينات ومعدات الأغذية", "meta_description": "شركة البراري للصناعة متخصصة في تصنيع ماكينات الأغذية وخطوط المعالجة ومعدات الستانلس ستيل منذ 2009. موقع من تطوير Subcode. تواصل مع Subcode." },
+      "en": { "meta_title": "Al Barari Industry | Food Machinery & Stainless Steel Equipment", "meta_description": "Al Barari Industry manufactures food machinery, processing lines and stainless steel equipment since 2009. Website built by Subcode. Contact Subcode for your company site." },
+      "tr": { "meta_title": "Al Barari Industry | Gıda Makineleri ve Paslanmaz Çelik Ekipman", "meta_description": "Al Barari Industry, 2009'dan bu yana gıda makineleri, işleme hatları ve paslanmaz çelik ekipman üretir. Web sitesi Subcode tarafından geliştirildi." }
+    }}
+  ],
+  "settings": {
+    "home_meta_title": {
+      "ar": "شركة برمجة تطبيقات وتصميم مواقع | SubCode صب كود",
+      "en": "Custom Software, Web & Mobile App Development | SubCode",
+      "tr": "Yazılım Şirketi | Web ve Mobil Uygulama Geliştirme"
+    },
+    "home_meta_description": {
+      "ar": "شركة برمجة سعودية متخصصة في تطوير تطبيقات الجوال (أندرويد وiOS)، تصميم المواقع والمتاجر الإلكترونية، والأنظمة المخصصة. اطلب عرض سعر مجاني لمشروعك الآن.",
+      "en": "SubCode builds mobile apps, websites, e-commerce and custom software for businesses in Saudi Arabia, Egypt and the Gulf. Get a free project quote today.",
+      "tr": "SubCode; mobil uygulama geliştirme, web tasarım, e-ticaret ve özel yazılım sunan bir yazılım şirketidir. Projeniz için ücretsiz teklif alın."
+    }
+  }
+}

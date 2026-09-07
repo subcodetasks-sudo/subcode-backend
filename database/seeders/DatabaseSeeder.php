@@ -20,9 +20,10 @@ class DatabaseSeeder extends Seeder
             // BlogSeeder::class,
             // FQSeeder::class,
             // TestimonialSeeder::class,
-            SettingSeeder::class,
-            CountrySeeder::class,
-            SeoSettingSeeder::class,
+            // SettingSeeder::class,
+            // CountrySeeder::class,
+            // SeoSettingSeeder::class,
+            SeoMetaSeeder::class,
         ]);
 
         // User::factory(10)->create();
