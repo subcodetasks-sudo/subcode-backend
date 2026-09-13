@@ -67,8 +67,7 @@ class ProjectForm
                                         ->label(__('strings.main_image'))
                                         ->disk('public')
                                         ->image()
-                                        ->imageEditor()
-                                        ->imageCropAspectRatio('16:9'),
+                                        ->imageEditor(),
 
                                     SeoSection::imageAltField('main_image_alt'),
 
