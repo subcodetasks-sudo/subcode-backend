@@ -181,13 +181,11 @@ class ProjectForm
                                         ->schema([
                                             TextInput::make('name')
                                                 ->label(__('strings.name'))
-                                                ->required()
                                                 ->maxLength(255)
                                                 ->translatableTabs(),
 
                                             TextInput::make('project_name')
                                                 ->label(__('strings.project_name'))
-                                                ->required()
                                                 ->maxLength(255)
                                                 ->translatableTabs(),
 
@@ -196,7 +194,6 @@ class ProjectForm
                                                     MarkdownEditor::make('description')
                                                         ->label(__('strings.description'))
                                                         ->toolbarButtons(['bold', 'italic', 'link', 'bulletList'])
-                                                        ->required()
                                                         ->columnSpanFull()
                                                         ->translatableTabs(),
                                                 ])
@@ -212,8 +209,7 @@ class ProjectForm
                                                 ->label(__('strings.project_image'))
                                                 ->disk('public')
                                                 ->image()
-                                                ->helperText(__('strings.image_hint'))
-                                                ->required(),
+                                                ->helperText(__('strings.image_hint')),
                                         ]),
                                 ]),
                         ]),
