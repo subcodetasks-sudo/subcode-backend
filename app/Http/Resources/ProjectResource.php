@@ -12,6 +12,9 @@ class ProjectResource extends JsonResource
 
     public function toArray(Request $request): array
     {
+        $technologies = is_array($this->technologies) ? $this->technologies : [];
+        $images = is_array($this->images) ? $this->images : [];
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -19,13 +22,15 @@ class ProjectResource extends JsonResource
             'description' => $this->description,
             'caption' => $this->caption,
             'long_description' => $this->long_description,
-            'technologies' => $this->technologies ? array_map(function ($technology) {
-                return url("storage/{$technology}");
-            }, $this->technologies) : [],
+            'technologies' => array_values(array_map(
+                fn ($technology) => url('storage/'.$technology),
+                array_filter($technologies, fn ($technology) => is_string($technology) && $technology !== '')
+            )),
             'main_image' => $this->imageWithAlt($this->main_image, $this->main_image_alt),
-            'images' => $this->images ? array_map(function ($image) {
-                return url("storage/{$image}");
-            }, $this->images) : [],
+            'images' => array_values(array_map(
+                fn ($image) => url('storage/'.$image),
+                array_filter($images, fn ($image) => is_string($image) && $image !== '')
+            )),
             'link_project' => $this->link_project,
             'status' => $this->status,
             'tags' => $this->tags,

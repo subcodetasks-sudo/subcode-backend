@@ -20,7 +20,7 @@ class OccasionController extends Controller
 
     public function show($slugOrId)
     {
-        $occasion = Occasion::with('meta')->where('is_active', true)->findBySlugOrId($slugOrId);
+        $occasion = Occasion::with('meta')->where('is_active', true)->whereSlugOrId($slugOrId)->first();
 
         if (! $occasion) {
             return $this->error(__('api.data_not_found'), 404);

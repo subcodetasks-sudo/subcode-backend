@@ -16,12 +16,13 @@ class CheckLanguage
      */
     public function handle(Request $request, Closure $next): Response
     {
-         $locale = $request->header('Accept-Language', 'ar');
+        $locale = strtolower(trim((string) $request->header('Accept-Language', 'ar')));
+        $locale = strtok($locale, ',;') ?: 'ar';
 
-        if(in_array($locale,['ar','en' ,'tr']))
-        {
-           App::setlocale($locale);
+        if (in_array($locale, ['ar', 'en', 'tr'], true)) {
+            App::setLocale($locale);
         }
+
         return $next($request);
     }
 }

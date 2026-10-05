@@ -33,7 +33,7 @@ class PackageController extends Controller
 
     public function show($slugOrId): JsonResponse
     {
-        $package = Package::with('meta')->findBySlugOrId($slugOrId);
+        $package = Package::with('meta')->whereSlugOrId($slugOrId)->first();
 
         if (! $package) {
             return $this->error(

@@ -40,7 +40,7 @@ class BlogController extends Controller
 
     public function show($slugOrId)
     {
-        $blog = Blog::with(['category', 'meta'])->findBySlugOrId($slugOrId);
+        $blog = Blog::with(['category', 'meta'])->whereSlugOrId($slugOrId)->first();
 
         if (! $blog) {
             return $this->error(
@@ -91,7 +91,7 @@ class BlogController extends Controller
 
     public function singleBlog($slugOrId)
     {
-        $blog = Blog::with(['category', 'meta'])->findBySlugOrId($slugOrId);
+        $blog = Blog::with(['category', 'meta'])->whereSlugOrId($slugOrId)->first();
 
         if (! $blog) {
             return $this->error(

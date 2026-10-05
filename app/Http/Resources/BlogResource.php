@@ -22,12 +22,12 @@ class BlogResource extends JsonResource
             'time_publish' => $this->time_publish,
             'is_active' => $this->is_active,
             'meta' => $this->seoMeta('blogs'),
-            'category' => [
+            'category' => $this->when($this->category, fn () => [
                 'id' => $this->category->id,
                 'name' => $this->category->name,
                 'slug' => $this->category->slug,
                 'image' => $this->imageWithAlt($this->category->image, $this->category->image_alt),
-            ],
+            ]),
             'author' => $this->whenLoaded('author'),
             'created_at' => $this->created_at,
         ];

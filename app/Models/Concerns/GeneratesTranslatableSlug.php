@@ -2,6 +2,8 @@
 
 namespace App\Models\Concerns;
 
+use App\Support\TranslatableSlugQuery;
+
 trait GeneratesTranslatableSlug
 {
     protected static function bootGeneratesTranslatableSlug(): void
@@ -18,22 +20,30 @@ trait GeneratesTranslatableSlug
 
     public function syncTranslatableSlugs(): void
     {
-        $langs = config('translatable.locales', ['ar', 'en', 'tr']);
+        $langs = config('translatable.locales', TranslatableSlugQuery::LOCALES);
         $slugs = $this->getTranslations('slug');
+        $changed = false;
 
         foreach ($langs as $lang) {
             $existing = trim((string) ($slugs[$lang] ?? ''));
+
             if ($existing !== '') {
+                if (($slugs[$lang] ?? null) !== $existing) {
+                    $slugs[$lang] = $existing;
+                    $changed = true;
+                }
+
                 continue;
             }
 
-            $source = $this->getTranslation(static::slugSourceAttribute(), $lang);
+            $source = $this->getTranslation(static::slugSourceAttribute(), $lang, false);
             if ($source) {
                 $slugs[$lang] = static::generateSlug($source, $lang, $this->id);
+                $changed = true;
             }
         }
 
-        if ($slugs !== []) {
+        if ($changed || $slugs !== []) {
             $this->setTranslations('slug', $slugs);
         }
     }
@@ -50,6 +60,11 @@ trait GeneratesTranslatableSlug
         $slug = preg_replace("/[^a-z0-9_\sءاأإآؤئبتثجحخدذرزسشصضطظعغفقكلمنهويةى]/u", '', $slug);
         $slug = preg_replace("/[\s-]+/", ' ', $slug);
         $slug = preg_replace("/[\s_]/", $separator, $slug);
+        $slug = trim($slug, $separator.' ');
+
+        if ($slug === '') {
+            return '';
+        }
 
         $query = static::whereRaw("JSON_UNQUOTE(JSON_EXTRACT(slug, '$.\"$lang\"')) = ?", [$slug]);
 
@@ -64,26 +79,28 @@ trait GeneratesTranslatableSlug
         return $slug;
     }
 
+    /**
+     * Match a slug in one locale, or any locale when $locale is null.
+     */
     public function scopeWhereSlug($query, string $slug, ?string $locale = null)
     {
-        $locale = $locale ?? app()->getLocale();
-
-        return $query->where("slug->{$locale}", $slug);
+        return TranslatableSlugQuery::whereMatches($query, $slug, $locale);
     }
 
-    public function scopeFindBySlugOrId($query, string|int $slugOrId, ?string $locale = null)
+    /**
+     * Constrain by numeric id or by slug in any locale. Always returns the query builder.
+     */
+    public function scopeWhereSlugOrId($query, string|int $slugOrId, ?string $locale = null)
     {
-        $locale = $locale ?? app()->getLocale();
-
         if (is_numeric($slugOrId)) {
-            return $query->find((int) $slugOrId);
+            return $query->whereKey((int) $slugOrId);
         }
 
-        return $query->whereSlug((string) $slugOrId, $locale)->first();
+        return $query->whereSlug(trim((string) $slugOrId), $locale);
     }
 
     public static function findBySlugOrId(string|int $slugOrId, ?string $locale = null): ?static
     {
-        return static::query()->findBySlugOrId($slugOrId, $locale);
+        return static::query()->whereSlugOrId($slugOrId, $locale)->first();
     }
 }

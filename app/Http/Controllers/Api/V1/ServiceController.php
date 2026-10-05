@@ -25,7 +25,8 @@ class ServiceController extends Controller
     public function show($slugOrId): JsonResponse
     {
         $service = Service::with(['features', 'featureServices', 'meta'])
-            ->findBySlugOrId($slugOrId);
+            ->whereSlugOrId($slugOrId)
+            ->first();
 
         if (! $service) {
             return $this->error(

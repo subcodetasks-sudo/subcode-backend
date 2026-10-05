@@ -40,7 +40,8 @@ class ProjectController extends Controller
     public function show($slugOrId): JsonResponse
     {
         $project = Project::with(['department', 'country', 'advantageProjects', 'reviewProjects', 'meta'])
-            ->findBySlugOrId($slugOrId);
+            ->whereSlugOrId($slugOrId)
+            ->first();
 
         if (! $project) {
             return $this->error(

@@ -25,10 +25,10 @@ final class TranslatableSlugExtractor
     {
         $locale = in_array($locale, self::LOCALES, true) ? $locale : 'ar';
 
+        // Plain strings are ambiguous (Spatie current-locale accessors). Do not
+        // treat them as valid for an arbitrary requested locale.
         if (is_string($slug)) {
-            $value = trim($slug);
-
-            return $value !== '' ? $value : null;
+            return null;
         }
 
         if (! is_array($slug)) {
@@ -46,13 +46,8 @@ final class TranslatableSlugExtractor
     public static function map(mixed $slug): array
     {
         if (is_string($slug)) {
-            $value = trim($slug);
-
-            return [
-                'ar' => $value !== '' ? $value : null,
-                'en' => $value !== '' ? $value : null,
-                'tr' => $value !== '' ? $value : null,
-            ];
+            // Ambiguous single value — do not clone across locales.
+            return ['ar' => null, 'en' => null, 'tr' => null];
         }
 
         if (! is_array($slug)) {
@@ -77,12 +72,7 @@ final class TranslatableSlugExtractor
         $values = [];
 
         if (is_string($slug)) {
-            $value = trim($slug);
-            if ($value !== '') {
-                $values[] = $value;
-            }
-
-            return array_values(array_unique($values));
+            return [];
         }
 
         if (! is_array($slug)) {

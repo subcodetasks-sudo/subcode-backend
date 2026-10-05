@@ -83,7 +83,7 @@ final class SlugResourceCollector
     }
 
     /**
-     * @return array<string, list<array{slug: array{ar: ?string, en: ?string, tr: ?string}}>>
+     * @return array<string, list<array{id: int, slug: array{ar: ?string, en: ?string, tr: ?string}}>>
      */
     public function collectAllBilingual(): array
     {
@@ -102,7 +102,7 @@ final class SlugResourceCollector
      */
     private function collectSlugs(array $definition, string $locale): array
     {
-        $query = $definition['model']::query()->select(['slug']);
+        $query = $definition['model']::query()->select(['id', 'slug']);
 
         if (! empty($definition['scope'])) {
             $definition['scope']($query);
@@ -111,7 +111,7 @@ final class SlugResourceCollector
         $slugs = [];
 
         foreach ($query->cursor() as $row) {
-            foreach (TranslatableSlugExtractor::collect($row->slug, $locale) as $slug) {
+            foreach (TranslatableSlugExtractor::collect($this->slugTranslations($row), $locale) as $slug) {
                 $slugs[] = $slug;
             }
         }
@@ -121,11 +121,11 @@ final class SlugResourceCollector
 
     /**
      * @param  array{model: class-string<Model>, scope?: callable}  $definition
-     * @return list<array{slug: array{ar: ?string, en: ?string, tr: ?string}}>
+     * @return list<array{id: int, slug: array{ar: ?string, en: ?string, tr: ?string}}>
      */
     private function collectBilingualSlugs(array $definition): array
     {
-        $query = $definition['model']::query()->select(['slug']);
+        $query = $definition['model']::query()->select(['id', 'slug']);
 
         if (! empty($definition['scope'])) {
             $definition['scope']($query);
@@ -134,15 +134,44 @@ final class SlugResourceCollector
         $items = [];
 
         foreach ($query->cursor() as $row) {
-            $slug = TranslatableSlugExtractor::map($row->slug);
+            $slug = TranslatableSlugExtractor::map($this->slugTranslations($row));
 
             if (($slug['ar'] ?? null) === null && ($slug['en'] ?? null) === null && ($slug['tr'] ?? null) === null) {
                 continue;
             }
 
-            $items[] = ['slug' => $slug];
+            // Drop null locale keys so consumers do not treat missing locales as copies.
+            $slug = array_filter($slug, fn ($value) => $value !== null);
+
+            $items[] = [
+                'id' => (int) $row->id,
+                'slug' => $slug,
+            ];
         }
 
         return $items;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function slugTranslations(Model $row): array
+    {
+        if (method_exists($row, 'getTranslations')) {
+            /** @var array<string, mixed> $translations */
+            $translations = $row->getTranslations('slug');
+
+            return is_array($translations) ? $translations : [];
+        }
+
+        $raw = $row->getAttributes()['slug'] ?? null;
+
+        if (is_string($raw) && $raw !== '') {
+            $decoded = json_decode($raw, true);
+
+            return is_array($decoded) ? $decoded : [];
+        }
+
+        return is_array($raw) ? $raw : [];
     }
 }

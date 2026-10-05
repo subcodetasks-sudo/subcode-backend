@@ -20,7 +20,7 @@ class SlugController extends Controller
 
         if ($request->boolean('all_locales')) {
             return $this->success(
-                Cache::remember('slugs.all_locales', 3600, fn () => $collector->collectAllBilingual()),
+                Cache::remember('slugs.v2.all_locales', 3600, fn () => $collector->collectAllBilingual()),
                 __('api.slugs_fetched_successfully')
             );
         }
@@ -30,7 +30,7 @@ class SlugController extends Controller
         }
 
         return $this->success(
-            Cache::remember("slugs.{$locale}", 3600, fn () => $collector->collectAllForLocale($locale)),
+            Cache::remember("slugs.v2.{$locale}", 3600, fn () => $collector->collectAllForLocale($locale)),
             __('api.slugs_fetched_successfully')
         );
     }

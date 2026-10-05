@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\LiteWebsiteResource;
+use App\Http\Resources\WebsiteResource;
 use App\Models\Visitor;
 use App\Models\Website;
+use App\Support\TranslatableSlugQuery;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\WebsiteResource;
 use App\Enum\VisitorTypeEnum;
-use App\Http\Resources\LiteWebsiteResource;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
 {
@@ -36,11 +37,11 @@ class WebsiteController extends Controller
     }
     public function show(Request $request, $slug): JsonResponse
     {
-          $lang = app()->getLocale();
-        $website = Website::with(['department', 'advantageWebsites', 'reviewWebsites', 'subscriptions', 'meta'])
-            ->where("slug->{$lang}", $slug)
-            ->where('status', 1)
-            ->first();
+        $website = TranslatableSlugQuery::whereMatches(
+            Website::with(['department', 'advantageWebsites', 'reviewWebsites', 'subscriptions', 'meta'])
+                ->where('status', 1),
+            (string) $slug
+        )->first();
 
         if (!$website) {
             return $this->error(
