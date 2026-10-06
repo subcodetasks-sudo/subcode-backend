@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\Concerns\WithSeoMeta;
-use App\Models\Setting;
 use Carbon\CarbonInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -12,8 +11,6 @@ use Illuminate\Support\Carbon;
 class BlogResource extends JsonResource
 {
     use WithSeoMeta;
-
-    private static ?string $cachedDefaultAuthorName = null;
 
     public function toArray(Request $request): array
     {
@@ -37,33 +34,12 @@ class BlogResource extends JsonResource
                 'image' => $this->imageWithAlt($this->category->image, $this->category->image_alt),
             ]),
             'author' => [
-                'name' => $this->resolveAuthorName(),
+                'name' => 'Seo Team',
             ],
             'published_at' => $this->toIso8601Utc($publishedAt),
             'updated_at' => $this->toIso8601Utc($updatedAt),
             'created_at' => $this->toIso8601Utc($this->created_at),
         ];
-    }
-
-    protected function resolveAuthorName(): string
-    {
-        if ($this->relationLoaded('author') || $this->auther_id) {
-            $authorName = trim((string) ($this->author?->name ?? ''));
-            if ($authorName !== '') {
-                return $authorName;
-            }
-        }
-
-        if (self::$cachedDefaultAuthorName !== null) {
-            return self::$cachedDefaultAuthorName;
-        }
-
-        $siteName = trim(strip_tags((string) (Setting::query()->value('site_name') ?? '')));
-        self::$cachedDefaultAuthorName = $siteName !== ''
-            ? $siteName
-            : (app()->getLocale() === 'ar' ? 'صب كود' : 'SubCode');
-
-        return self::$cachedDefaultAuthorName;
     }
 
     protected function resolvePublishedAt(): CarbonInterface
