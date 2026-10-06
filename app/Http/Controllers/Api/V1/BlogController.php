@@ -19,7 +19,7 @@ class BlogController extends Controller
 
         // $blogs = $this->getPublishedOrScheduledBlogs();
 
-        $blogs = Blog::with(['category', 'meta'])
+        $blogs = Blog::with(['category', 'meta', 'author'])
             ->where('is_active', 1)
             ->where('status', 'publish')
             ->latest()
@@ -40,7 +40,7 @@ class BlogController extends Controller
 
     public function show($slugOrId)
     {
-        $blog = Blog::with(['category', 'meta'])->whereSlugOrId($slugOrId)->first();
+        $blog = Blog::with(['category', 'meta', 'author'])->whereSlugOrId($slugOrId)->first();
 
         if (! $blog) {
             return $this->error(
@@ -75,7 +75,7 @@ class BlogController extends Controller
     {
         $timeNow = now()->setTimezone(config('app.timezone'))->toDateTimeString();
 
-        return Blog::with(['category', 'meta', 'admins'])->where(function ($query) use ($timeNow) {
+        return Blog::with(['category', 'meta', 'author'])->where(function ($query) use ($timeNow) {
             $query->where(function ($q) {
                 $q->where('status', 'publish')
                     ->where('is_active', 1);
@@ -91,7 +91,7 @@ class BlogController extends Controller
 
     public function singleBlog($slugOrId)
     {
-        $blog = Blog::with(['category', 'meta'])->whereSlugOrId($slugOrId)->first();
+        $blog = Blog::with(['category', 'meta', 'author'])->whereSlugOrId($slugOrId)->first();
 
         if (! $blog) {
             return $this->error(
@@ -101,21 +101,15 @@ class BlogController extends Controller
         }
 
         $alsoLike = Blog::query()
+            ->with('author')
             ->where('is_active', 1)
             ->where('status', 'publish')
             ->where('category_id', $blog->category_id)
             ->where('id', '!=', $blog->id)
             ->inRandomOrder()
             ->take(3)
-            ->get(['id', 'title', 'description', 'slug', 'image', 'created_at'])
-            ->map(fn (Blog $related) => [
-                'id' => $related->id,
-                'title' => $related->title,
-                'description' => $related->description,
-                'slug' => $related->slug,
-                'image' => $related->image ? url("storage/{$related->image}") : null,
-                'created_at' => $related->created_at,
-            ]);
+            ->get()
+            ->map(fn (Blog $related) => (new BlogResource($related))->toArray(request()));
 
         $blogPayload = (new BlogResource($blog))->toArray(request());
         $blogPayload['also_like'] = $alsoLike;
@@ -150,7 +144,7 @@ class BlogController extends Controller
             $query->where('title', 'like', "%{$search}%")
                 ->orWhere('description', 'like', "%{$search}%");
         })
-            ->with(['category', 'meta'])
+            ->with(['category', 'meta', 'author'])
             ->get();
     }
 
@@ -163,6 +157,7 @@ class BlogController extends Controller
                 ->where('status', 'publish'),
             'blogs.meta',
             'blogs.category',
+            'blogs.author',
         ])->get();
 
         if ($categories->isEmpty()) {
@@ -197,6 +192,7 @@ class BlogController extends Controller
                 ->where('status', 'publish'),
             'blogs.meta',
             'blogs.category',
+            'blogs.author',
         ])->find($id);
 
         if (! $category) {

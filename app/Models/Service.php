@@ -31,4 +31,9 @@ class Service extends Model
     {
         return $this->hasMany(FeatureService::class);
     }
+
+    public function faqs()
+    {
+        return $this->hasMany(ServiceFaq::class)->orderBy('sort_order');
+    }
 }

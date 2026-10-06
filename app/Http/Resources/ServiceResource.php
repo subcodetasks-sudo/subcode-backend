@@ -24,6 +24,25 @@ class ServiceResource extends JsonResource
             'feature_services' => $this->whenLoaded('featureServices', function () {
                 return FeatureServiceResource::collection($this->featureServices);
             }),
+            'faqs' => $this->whenLoaded('faqs', function () {
+                return $this->faqs
+                    ->map(function ($faq) {
+                        $question = trim(strip_tags((string) $faq->question));
+                        $answer = trim(strip_tags((string) $faq->answer));
+
+                        if ($question === '' || $answer === '') {
+                            return null;
+                        }
+
+                        return [
+                            'question' => $question,
+                            'answer' => $answer,
+                        ];
+                    })
+                    ->filter()
+                    ->values()
+                    ->all();
+            }),
             'meta' => $this->seoMeta('services'),
         ];
     }

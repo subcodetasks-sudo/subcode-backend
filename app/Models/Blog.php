@@ -21,6 +21,14 @@ class Blog extends Model
 
     public array $translatable = ['title', 'description', 'slug', 'image_alt'];
 
+    protected function casts(): array
+    {
+        return [
+            'time_publish' => 'datetime',
+            'is_active' => 'boolean',
+        ];
+    }
+
     protected static function slugSourceAttribute(): string
     {
         return 'title';

@@ -88,6 +88,33 @@ class ServiceForm
                             ->grid(2)
                     ]),
 
+                Section::make(__('admin.faqs'))
+                    ->columns(1)
+                    ->columnSpanFull()
+                    ->schema([
+                        Repeater::make('faqs')
+                            ->relationship('faqs')
+                            ->label(__('admin.faqs'))
+                            ->orderColumn('sort_order')
+                            ->collapsible()
+                            ->defaultItems(0)
+                            ->schema([
+                                TextInput::make('question')
+                                    ->label(__('admin.question'))
+                                    ->required()
+                                    ->maxLength(500)
+                                    ->translatableTabs(),
+                                Textarea::make('answer')
+                                    ->label(__('admin.answer'))
+                                    ->required()
+                                    ->maxLength(2000)
+                                    ->rows(4)
+                                    ->translatableTabs()
+                                    ->columnSpanFull(),
+                            ])
+                            ->columnSpanFull(),
+                    ]),
+
                 SeoSection::section(),
             ]);
     }
