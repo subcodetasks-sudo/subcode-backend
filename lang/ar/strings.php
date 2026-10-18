@@ -110,7 +110,7 @@ return [
     'visitors_count' => 'عدد الزوار',
     'tr' => 'التركية',
     "subscribers" => "المشتركين",
-    "subscribers_description" => "أضف المشتركين: الصورة والاسم ورأي العميل (اختياري).",
+    "subscribers_description" => "أضف المشتركين: الصورة والاسم ورأي العميل (كلها اختيارية).",
     "customer_opinion" => "رأي العميل",
     "add_subscriber" => "إضافة مشترك",
     "subscriptions"=>"الاشتراكات",

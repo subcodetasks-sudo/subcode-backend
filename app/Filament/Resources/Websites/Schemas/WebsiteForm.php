@@ -227,7 +227,7 @@ class WebsiteForm
                                         ->schema([
                                             TextInput::make('name')
                                                 ->label(__('strings.name'))
-                                                ->required()
+                                                ->nullable()
                                                 ->maxLength(255)
                                                 ->translatableTabs(),
 
@@ -236,7 +236,7 @@ class WebsiteForm
                                                 ->disk('public')
                                                 ->image()
                                                 ->helperText(__('strings.image_hint'))
-                                                ->required(),
+                                                ->nullable(),
 
                                             Group::make()
                                                 ->schema([

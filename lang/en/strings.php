@@ -112,7 +112,7 @@ return
     'visitors_count' => 'Visitors Count',
         "tr"=>"Turkish",
         "subscribers" => "Subscribers",
-        "subscribers_description" => "Add subscribers: image, name and customer opinion (optional).",
+        "subscribers_description" => "Add subscribers: image, name and customer opinion (all optional).",
         "customer_opinion" => "Customer opinion",
         "add_subscriber" => "Add Subscriber",
         "subscriptions" => "Subscriptions",
