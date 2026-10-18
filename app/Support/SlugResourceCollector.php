@@ -23,9 +23,7 @@ final class SlugResourceCollector
         return [
             'blogs' => [
                 'model' => Blog::class,
-                'scope' => fn (Builder $query) => $query
-                    ->where('is_active', true)
-                    ->where('status', 'publish'),
+                'scope' => fn (Builder $query) => $query->publiclyVisible(),
             ],
             'categories' => [
                 'model' => Category::class,

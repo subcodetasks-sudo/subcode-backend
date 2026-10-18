@@ -2,6 +2,7 @@
 
 namespace App\Models\Concerns;
 
+use App\Support\RedirectSlugRecorder;
 use App\Support\TranslatableSlugQuery;
 
 trait GeneratesTranslatableSlug
@@ -11,6 +12,19 @@ trait GeneratesTranslatableSlug
         static::saving(function ($model): void {
             $model->syncTranslatableSlugs();
         });
+
+        static::updated(function ($model): void {
+            RedirectSlugRecorder::record($model);
+        });
+    }
+
+    /**
+     * Redirect resource type (see RedirectResourceType) used to build the public path
+     * when a slug changes. Null disables automatic redirect creation for the model.
+     */
+    public static function redirectResourceType(): ?string
+    {
+        return null;
     }
 
     protected static function slugSourceAttribute(): string

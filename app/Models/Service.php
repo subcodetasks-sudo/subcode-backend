@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Concerns\GeneratesTranslatableSlug;
 use App\Models\Concerns\HasMetaSeo;
+use App\Support\RedirectResourceType;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
@@ -16,6 +17,11 @@ class Service extends Model
     protected $fillable = ['title', 'slug', 'description', 'image', 'image_alt'];
 
     public $translatable = ['title', 'slug', 'description', 'image_alt'];
+
+    public static function redirectResourceType(): ?string
+    {
+        return RedirectResourceType::SERVICE;
+    }
 
     protected static function slugSourceAttribute(): string
     {

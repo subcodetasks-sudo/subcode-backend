@@ -95,10 +95,9 @@ final class SlugField
         $locks = [];
 
         foreach (self::LOCALES as $locale) {
+            // The slug is generated once; an existing slug never follows the title again.
             $slug = trim((string) $record->getTranslation('slug', $locale, false));
-            $source = trim((string) $record->getTranslation($sourceField, $locale, false));
-            $preview = self::generatePreviewSlug($source);
-            $locks[$locale] = $slug === '' || $slug === $preview;
+            $locks[$locale] = $slug === '';
         }
 
         return $locks;

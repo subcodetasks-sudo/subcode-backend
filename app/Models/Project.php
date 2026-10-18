@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Concerns\GeneratesTranslatableSlug;
 use App\Models\Concerns\HasMetaSeo;
+use App\Support\RedirectResourceType;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
@@ -16,6 +17,11 @@ class Project extends Model
     protected $fillable = ['name', 'slug', 'description', 'image', 'link_project', 'department_id', 'country_id', 'status', 'caption', 'main_image', 'main_image_alt', 'images', 'tags', 'long_description', 'technologies', 'is_special'];
 
     public $translatable = ['name', 'description', 'caption', 'long_description', 'slug', 'tags', 'main_image_alt'];
+
+    public static function redirectResourceType(): ?string
+    {
+        return RedirectResourceType::PROJECT;
+    }
 
     protected static function slugSourceAttribute(): string
     {

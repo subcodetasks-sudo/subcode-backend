@@ -20,8 +20,7 @@ class BlogController extends Controller
         // $blogs = $this->getPublishedOrScheduledBlogs();
 
         $blogs = Blog::with(['category', 'meta', 'author'])
-            ->where('is_active', 1)
-            ->where('status', 'publish')
+            ->publiclyVisible()
             ->latest()
             ->paginate(15);
 
@@ -73,18 +72,8 @@ class BlogController extends Controller
 
     private function getPublishedOrScheduledBlogs()
     {
-        $timeNow = now()->setTimezone(config('app.timezone'))->toDateTimeString();
-
-        return Blog::with(['category', 'meta', 'author'])->where(function ($query) use ($timeNow) {
-            $query->where(function ($q) {
-                $q->where('status', 'publish')
-                    ->where('is_active', 1);
-            })->orWhere(function ($q) use ($timeNow) {
-                $q->where('status', 'schedule')
-                    ->where('time_publish', '<=', $timeNow)
-                    ->where('is_active', 1);
-            });
-        })
+        return Blog::with(['category', 'meta', 'author'])
+            ->publiclyVisible()
             ->latest()
             ->paginate(6);
     }
@@ -102,8 +91,7 @@ class BlogController extends Controller
 
         $alsoLike = Blog::query()
             ->with('author')
-            ->where('is_active', 1)
-            ->where('status', 'publish')
+            ->publiclyVisible()
             ->where('category_id', $blog->category_id)
             ->where('id', '!=', $blog->id)
             ->inRandomOrder()
@@ -152,9 +140,7 @@ class BlogController extends Controller
     {
         $categories = Category::with([
             'meta',
-            'blogs' => fn ($query) => $query
-                ->where('is_active', 1)
-                ->where('status', 'publish'),
+            'blogs' => fn ($query) => $query->publiclyVisible(),
             'blogs.meta',
             'blogs.category',
             'blogs.author',
@@ -187,9 +173,7 @@ class BlogController extends Controller
     {
         $category = Category::with([
             'meta',
-            'blogs' => fn ($query) => $query
-                ->where('is_active', 1)
-                ->where('status', 'publish'),
+            'blogs' => fn ($query) => $query->publiclyVisible(),
             'blogs.meta',
             'blogs.category',
             'blogs.author',
