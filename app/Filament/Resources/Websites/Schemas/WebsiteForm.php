@@ -214,6 +214,46 @@ class WebsiteForm
                                 ]),
                         ]),
 
+                    Tab::make(__('strings.subscribers'))
+                        ->icon('heroicon-o-users')
+                        ->schema([
+                            Section::make()
+                                ->description(__('strings.subscribers_description'))
+                                ->schema([
+                                    Repeater::make('websiteSubscribers')
+                                        ->label(__('strings.subscribers'))
+                                        ->relationship()
+                                        ->columns(2)
+                                        ->schema([
+                                            TextInput::make('name')
+                                                ->label(__('strings.name'))
+                                                ->required()
+                                                ->maxLength(255)
+                                                ->translatableTabs(),
+
+                                            FileUpload::make('image')
+                                                ->label(__('strings.image'))
+                                                ->disk('public')
+                                                ->image()
+                                                ->helperText(__('strings.image_hint'))
+                                                ->required(),
+
+                                            Group::make()
+                                                ->schema([
+                                                    MarkdownEditor::make('opinion')
+                                                        ->label(__('strings.customer_opinion'))
+                                                        ->toolbarButtons(['bold', 'italic', 'link', 'bulletList'])
+                                                        ->nullable()
+                                                        ->columnSpanFull()
+                                                        ->translatableTabs(),
+                                                ])->columnSpanFull(),
+                                        ])
+                                        ->defaultItems(0)
+                                        ->createItemButtonLabel(__('strings.add_subscriber'))
+                                        ->collapsible(),
+                                ]),
+                        ]),
+
                     Tab::make(__('strings.subscriptions'))
                         ->icon('heroicon-o-credit-card')
                         ->schema([

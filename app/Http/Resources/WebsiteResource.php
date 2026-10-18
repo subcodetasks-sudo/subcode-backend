@@ -41,6 +41,9 @@ class WebsiteResource extends JsonResource
             'review_websites' => $this->whenLoaded('reviewWebsites', function () {
                 return ReviewWebsiteResource::collection($this->reviewWebsites);
             }),
+            'website_subscribers' => $this->whenLoaded('websiteSubscribers', function () {
+                return WebsiteSubscriberResource::collection($this->websiteSubscribers);
+            }),
             'subscriptions' => $this->whenLoaded('subscriptions', function () {
                 return SubscriptionResource::collection($this->subscriptions);
             }),

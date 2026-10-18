@@ -62,6 +62,11 @@ class Website extends Model
         return $this->hasMany(ReviewWebsite::class);
     }
 
+    public function websiteSubscribers()
+    {
+        return $this->hasMany(WebsiteSubscriber::class);
+    }
+
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);

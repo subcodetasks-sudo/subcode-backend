@@ -153,6 +153,30 @@ class WebsiteInfolist
                                 ]),
                         ]),
 
+                    // 👥 Subscribers
+                    Tab::make(__('strings.subscribers'))
+                        ->icon('heroicon-o-users')
+                        ->schema([
+                            Section::make()
+                                ->schema([
+                                    RepeatableEntry::make('websiteSubscribers')
+                                        ->label(__('strings.subscribers'))
+                                        ->schema([
+                                            ImageEntry::make('image')
+                                                ->label(__('strings.image'))
+                                                ->disk('public'),
+
+                                            TextEntry::make('name')
+                                                ->label(__('strings.name')),
+
+                                            TextEntry::make('opinion')
+                                                ->label(__('strings.customer_opinion'))
+                                                ->placeholder('—'),
+                                        ])->columns(3)
+                                        ->columnSpanFull(),
+                                ]),
+                        ]),
+
                     // 💳 Subscriptions
                     Tab::make(__('strings.subscriptions'))
                         ->icon('heroicon-o-credit-card')

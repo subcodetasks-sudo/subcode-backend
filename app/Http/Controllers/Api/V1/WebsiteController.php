@@ -38,7 +38,7 @@ class WebsiteController extends Controller
     public function show(Request $request, $slug): JsonResponse
     {
         $website = TranslatableSlugQuery::whereMatches(
-            Website::with(['department', 'advantageWebsites', 'reviewWebsites', 'subscriptions', 'meta'])
+            Website::with(['department', 'advantageWebsites', 'reviewWebsites', 'websiteSubscribers', 'subscriptions', 'meta'])
                 ->where('status', 1),
             (string) $slug
         )->first();
