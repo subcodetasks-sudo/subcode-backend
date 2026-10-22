@@ -69,6 +69,15 @@ trait GeneratesTranslatableSlug
         }
 
         $slug = trim($string);
+        // Turkish letters must be transliterated; the whitelist below would strip them.
+        $slug = strtr($slug, [
+            'İ' => 'i', 'I' => 'i', 'ı' => 'i',
+            'Ğ' => 'g', 'ğ' => 'g',
+            'Ü' => 'u', 'ü' => 'u',
+            'Ş' => 's', 'ş' => 's',
+            'Ö' => 'o', 'ö' => 'o',
+            'Ç' => 'c', 'ç' => 'c',
+        ]);
         $slug = mb_strtolower($slug, 'UTF-8');
         $slug = str_replace(['/', '\\'], $separator, $slug);
         $slug = preg_replace("/[^a-z0-9_\sءاأإآؤئبتثجحخدذرزسشصضطظعغفقكلمنهويةى]/u", '', $slug);
